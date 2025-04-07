@@ -1,0 +1,27 @@
+{
+    "name": "@bobbyfidz/cobalt-graphql-schema",
+    "version": "0.0.0",
+    "type": "module",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "lint": "eslint"
+    },
+    "dependencies": {
+        "@osdk/client": "^2.1.2",
+        "@osdk/foundry.ontologies": "^2.17.0",
+        "@valinor-enterprises/assertions": "^0.2.0",
+        "change-case": "^5.4.4",
+        "grafast": "^0.1.1-beta.21",
+        "graphql": "^16.10.0"
+    },
+    "devDependencies": {
+        "@valinor-enterprises/universal-build-config": "^0.1.0",
+        "eslint": "^9.21.0",
+        "typescript": "~5.8.2"
+    }
+}
