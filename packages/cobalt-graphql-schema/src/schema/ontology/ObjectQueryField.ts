@@ -14,7 +14,6 @@ function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): N
     // TODO: lift this further up
     const loadObjects = loadOneCallback<PrimaryKeyValue, TypedOntologyObject, {}, CobaltGraphQLContext>(
         async (ids, { attributes, unary: context }) => {
-            console.log("loadObjects", ids, attributes);
             // TODO: handle page sizes
             const objects = await OntologyObjectsV2.search(
                 context.client,
