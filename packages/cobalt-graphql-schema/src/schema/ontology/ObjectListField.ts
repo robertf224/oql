@@ -1,9 +1,11 @@
-import { ObjectTypeV2 } from "@osdk/foundry.ontologies";
-import { objectFieldSpec } from "grafast";
+import { ObjectTypeV2, PropertyApiName } from "@osdk/foundry.ontologies";
+import { Maybe, objectFieldSpec, Step } from "grafast";
 import { NamedGraphQLFieldConfig } from "../NamedGraphQLFieldConfig.js";
 import { GetTypeReference } from "../TypeRegistry.js";
 import { ObjectListTypes } from "./ObjectListTypes.js";
 import { objectListConnection } from "./ObjectListStep.js";
+import { GraphQLString } from "graphql";
+import { GraphQLInt } from "graphql";
 
 function create(
     path: string,
@@ -14,8 +16,30 @@ function create(
         {
             description: `A list of ${objectType.pluralDisplayName}.`,
             // TODO: args
+            args: {
+                after: {
+                    type: GraphQLString,
+                },
+                first: {
+                    type: GraphQLInt,
+                },
+                orderBy: {
+                    type: ObjectListTypes.getOrderByTypeReference(getTypeReference, objectType),
+                },
+            },
             type: ObjectListTypes.getPageTypeReference(getTypeReference, objectType),
-            plan: ($objectSet, $args) => objectListConnection(objectType, $objectSet),
+            plan: ($objectSet, $args) =>
+                objectListConnection(
+                    objectType,
+                    $objectSet,
+                    $args.getRaw() as Step<{
+                        first: Maybe<number>;
+                        after: Maybe<string>;
+                        orderBy: Maybe<{
+                            fields: { field: PropertyApiName; direction: "asc" | "desc" }[];
+                        }>;
+                    }>
+                ),
         },
         `${path}.list`
     );

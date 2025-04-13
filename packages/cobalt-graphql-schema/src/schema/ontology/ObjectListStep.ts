@@ -1,4 +1,15 @@
-import { access, each, ExecutionDetails, ExecutionResults, lambda, object, Step, __ItemStep } from "grafast";
+import {
+    access,
+    each,
+    ExecutionDetails,
+    ExecutionResults,
+    lambda,
+    object,
+    Step,
+    __ItemStep,
+    ObjectStep,
+    Maybe,
+} from "grafast";
 import {
     ObjectSet,
     ObjectTypeV2,
@@ -8,16 +19,27 @@ import {
 } from "@osdk/foundry.ontologies";
 import { assert } from "@valinor-enterprises/assertions";
 import { TypedOntologyObject } from "../TypedOntologyObject.js";
-import { CobaltGraphQLContext, context } from "../context.js";
+import { OpalGraphQLContext, context } from "../context.js";
 
 export interface ObjectListStepData {
     data: TypedOntologyObject[];
     nextPageToken?: string;
 }
 
+export interface ObjectListArgs {
+    pageSize?: number;
+    pageToken?: string;
+    orderBy?: {
+        fields: { field: PropertyApiName; direction: "asc" | "desc" }[];
+    };
+}
+
+// relevance or fields
+// if fields, field + direction(asc or desc)
+
 class LoadedObjectStep extends Step<TypedOntologyObject> {
     static $$export = {
-        moduleName: "@bobbyfidz/cobalt-graphql-schema",
+        moduleName: "@bobbyfidz/opal-graphql-schema",
         exportName: "LoadedObjectStep",
     };
 
@@ -54,7 +76,7 @@ class LoadedObjectStep extends Step<TypedOntologyObject> {
 
 class ObjectListStep extends Step<ObjectListStepData> {
     static $$export = {
-        moduleName: "@bobbyfidz/cobalt-graphql-schema",
+        moduleName: "@bobbyfidz/opal-graphql-schema",
         exportName: "ObjectListStep",
     };
 
@@ -63,15 +85,15 @@ class ObjectListStep extends Step<ObjectListStepData> {
     #objectType: ObjectTypeV2;
     #contextStepId: number;
     #objectSetStepId: number;
-    #pageSizeStepId?: number;
-    #pageTokenStepId?: number;
+    #argsStep: number;
 
-    constructor(objectType: ObjectTypeV2, $objectSet: Step<ObjectSet>) {
+    constructor(objectType: ObjectTypeV2, $objectSet: Step<ObjectSet>, $args: Step<ObjectListArgs>) {
         super();
+
         this.#objectType = objectType;
         this.#contextStepId = this.addUnaryDependency(context());
         this.#objectSetStepId = this.addDependency($objectSet);
-        // TODO: first/after/orderBy args
+        this.#argsStep = this.addDependency($args);
     }
 
     addProperties(properties: Set<PropertyApiName>) {
@@ -80,10 +102,9 @@ class ObjectListStep extends Step<ObjectListStepData> {
 
     execute({ values, indexMap }: ExecutionDetails): ExecutionResults<ObjectListStepData> {
         return indexMap(async (index) => {
-            const context: CobaltGraphQLContext = values[this.#contextStepId]!.at(index);
+            const context: OpalGraphQLContext = values[this.#contextStepId]!.at(index);
             const objectSet: ObjectSet = values[this.#objectSetStepId]!.at(index);
-            const pageSize = this.#pageSizeStepId ? values[this.#pageSizeStepId]!.at(index) : undefined;
-            const pageToken = this.#pageTokenStepId ? values[this.#pageTokenStepId]!.at(index) : undefined;
+            const { pageSize, pageToken, orderBy }: ObjectListArgs = values[this.#argsStep]!.at(index);
 
             const { data, nextPageToken } = await OntologyObjectSets.load(
                 context.client,
@@ -94,6 +115,7 @@ class ObjectListStep extends Step<ObjectListStepData> {
                     pageSize,
                     pageToken,
                     excludeRid: true,
+                    orderBy,
                 }
             );
 
@@ -116,8 +138,26 @@ class ObjectListStep extends Step<ObjectListStepData> {
     }
 }
 
-export function objectListConnection(objectType: ObjectTypeV2, $objectSet: Step<ObjectSet>) {
-    const objectListStep = new ObjectListStep(objectType, $objectSet);
+export function objectListConnection(
+    objectType: ObjectTypeV2,
+    $objectSet: Step<ObjectSet>,
+    $args: Step<{
+        first: Maybe<number>;
+        after: Maybe<string>;
+        orderBy: Maybe<{
+            fields: { field: PropertyApiName; direction: "asc" | "desc" }[];
+        }>;
+    }>
+) {
+    const objectListStep = new ObjectListStep(
+        objectType,
+        $objectSet,
+        lambda($args, (args) => ({
+            pageSize: args.first ?? undefined,
+            pageToken: args.after ?? undefined,
+            orderBy: args.orderBy ?? undefined,
+        }))
+    );
     return object({
         pageInfo: object({
             hasNextPage: lambda(objectListStep.nextPageToken(), (pageToken) => pageToken !== undefined, true),

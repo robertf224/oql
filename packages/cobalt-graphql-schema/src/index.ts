@@ -1,1 +1,1 @@
-export * from "./schema/CobaltGraphQLSchema.js";
+export * from "./schema/OpalGraphQLSchema.js";

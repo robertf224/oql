@@ -33,11 +33,11 @@ importers:
         specifier: 2.3.3
         version: 2.3.3
 
-  apps/cobalt-graphql-server:
+  apps/opal-graphql-server:
     dependencies:
-      '@bobbyfidz/cobalt-graphql-schema':
+      '@bobbyfidz/opal-graphql-schema':
         specifier: workspace:*
-        version: link:../../packages/cobalt-graphql-schema
+        version: link:../../packages/opal-graphql-schema
       '@osdk/client':
         specifier: ^2.1.2
         version: 2.1.2
@@ -73,7 +73,7 @@ importers:
         specifier: ~5.8.2
         version: 5.8.2
 
-  packages/cobalt-graphql-schema:
+  packages/opal-graphql-schema:
     dependencies:
       '@osdk/client':
         specifier: ^2.1.2

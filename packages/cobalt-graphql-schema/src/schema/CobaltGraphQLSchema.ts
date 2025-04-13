@@ -16,9 +16,12 @@ function create(ontology: OntologyFullMetadata): GraphQLSchema {
         ObjectSetType.create(typeRegistry, objectType),
         ObjectListTypes.createPageType(typeRegistry, objectType.objectType),
         ObjectListTypes.createEdgeType(typeRegistry, objectType.objectType),
+        ObjectListTypes.createOrderByType(typeRegistry, objectType.objectType),
+        ObjectListTypes.createPropertyNameType(objectType.objectType),
+        ObjectListTypes.createFieldOrderingType(typeRegistry, objectType.objectType),
     ]);
 
-    const types = [...ontologyTypes, ListTypes.PageInfoType];
+    const types = [...ontologyTypes, ListTypes.PageInfoType, ObjectListTypes.OrderingDirectionType];
     types.forEach(typeRegistry.register);
 
     return new GraphQLSchema({
@@ -32,6 +35,6 @@ function create(ontology: OntologyFullMetadata): GraphQLSchema {
     });
 }
 
-export const CobaltGraphQLSchema = {
+export const OpalGraphQLSchema = {
     create,
 };

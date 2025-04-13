@@ -1,5 +1,5 @@
 {
-    "name": "@bobbyfidz/cobalt-graphql-server",
+    "name": "@bobbyfidz/opal-graphql-server",
     "version": "0.0.0",
     "private": true,
     "type": "module",
@@ -9,7 +9,7 @@
         "start": "node --env-file .env lib/index.js"
     },
     "dependencies": {
-        "@bobbyfidz/cobalt-graphql-schema": "workspace:*",
+        "@bobbyfidz/opal-graphql-schema": "workspace:*",
         "@osdk/client": "^2.1.2",
         "@osdk/foundry.ontologies": "^2.17.0",
         "@osdk/oauth": "^1.1.1",

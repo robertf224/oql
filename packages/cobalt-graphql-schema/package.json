@@ -1,5 +1,5 @@
 {
-    "name": "@bobbyfidz/cobalt-graphql-schema",
+    "name": "@bobbyfidz/opal-graphql-schema",
     "version": "0.0.0",
     "type": "module",
     "main": "lib/index.js",

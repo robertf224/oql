@@ -1,5 +1,5 @@
 import { assert } from "@valinor-enterprises/assertions";
-import type { GraphQLFieldConfig, GraphQLNamedType } from "graphql";
+import type { GraphQLFieldConfig, GraphQLInputFieldConfig, GraphQLNamedType } from "graphql";
 
 export type GetTypeReference = (name: string) => GraphQLNamedType;
 
@@ -10,9 +10,9 @@ export class TypeRegistry {
         this.#types.set(type.name, type);
     };
 
-    use = (
-        fields: (getTypeReference: GetTypeReference) => Record<string, GraphQLFieldConfig<any, any>>
-    ): (() => Record<string, GraphQLFieldConfig<any, any>>) => {
+    use = <T extends GraphQLFieldConfig<any, any> | GraphQLInputFieldConfig>(
+        fields: (getTypeReference: GetTypeReference) => Record<string, T>
+    ): (() => Record<string, T>) => {
         return () => fields(this.#get);
     };
 

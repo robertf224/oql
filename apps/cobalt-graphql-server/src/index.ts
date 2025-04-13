@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { grafserv } from "grafserv/node";
 import { OntologiesV2 } from "@osdk/foundry.ontologies";
-import { CobaltGraphQLSchema } from "@bobbyfidz/cobalt-graphql-schema";
+import { OpalGraphQLSchema } from "@bobbyfidz/opal-graphql-schema";
 import { getFoundryClient } from "./getFoundryClient.js";
 
 // TODO: switch to Hono when integration is available
@@ -11,7 +11,7 @@ export async function start() {
     const ontology = await OntologiesV2.getFullMetadata(client, process.env.FOUNDRY_ONTOLOGY_RID!);
 
     const serv = grafserv({
-        schema: CobaltGraphQLSchema.create(ontology),
+        schema: OpalGraphQLSchema.create(ontology),
         preset: {
             grafast: {
                 context: {
