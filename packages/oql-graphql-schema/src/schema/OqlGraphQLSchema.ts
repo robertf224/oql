@@ -35,6 +35,6 @@ function create(ontology: OntologyFullMetadata): GraphQLSchema {
     });
 }
 
-export const OpalGraphQLSchema = {
+export const OqlGraphQLSchema = {
     create,
 };

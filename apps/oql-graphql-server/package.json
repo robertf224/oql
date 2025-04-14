@@ -1,5 +1,5 @@
 {
-    "name": "@bobbyfidz/opal-graphql-server",
+    "name": "@bobbyfidz/oql-graphql-server",
     "version": "0.0.0",
     "private": true,
     "type": "module",
@@ -9,7 +9,7 @@
         "start": "node --env-file .env lib/index.js"
     },
     "dependencies": {
-        "@bobbyfidz/opal-graphql-schema": "workspace:*",
+        "@bobbyfidz/oql-graphql-schema": "workspace:*",
         "@osdk/client": "^2.1.2",
         "@osdk/foundry.ontologies": "^2.17.0",
         "@osdk/oauth": "^1.1.1",
@@ -18,8 +18,8 @@
         "grafserv": "^0.1.1-beta.21"
     },
     "devDependencies": {
+        "@bobbyfidz/universal-build-config": "^0.1.0",
         "@types/node": "^20.17.14",
-        "@valinor-enterprises/universal-build-config": "^0.1.0",
         "esbuild": "^0.25.2",
         "eslint": "^9.21.0",
         "typescript": "~5.8.2"

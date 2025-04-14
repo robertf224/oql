@@ -19,7 +19,7 @@ import {
 } from "@osdk/foundry.ontologies";
 import { assert } from "@valinor-enterprises/assertions";
 import { TypedOntologyObject } from "../TypedOntologyObject.js";
-import { OpalGraphQLContext, context } from "../context.js";
+import { OqlGraphQLContext, context } from "../context.js";
 
 export interface ObjectListStepData {
     data: TypedOntologyObject[];
@@ -39,7 +39,7 @@ export interface ObjectListArgs {
 
 class LoadedObjectStep extends Step<TypedOntologyObject> {
     static $$export = {
-        moduleName: "@bobbyfidz/opal-graphql-schema",
+        moduleName: "@bobbyfidz/oql-graphql-schema",
         exportName: "LoadedObjectStep",
     };
 
@@ -76,7 +76,7 @@ class LoadedObjectStep extends Step<TypedOntologyObject> {
 
 class ObjectListStep extends Step<ObjectListStepData> {
     static $$export = {
-        moduleName: "@bobbyfidz/opal-graphql-schema",
+        moduleName: "@bobbyfidz/oql-graphql-schema",
         exportName: "ObjectListStep",
     };
 
@@ -102,7 +102,7 @@ class ObjectListStep extends Step<ObjectListStepData> {
 
     execute({ values, indexMap }: ExecutionDetails): ExecutionResults<ObjectListStepData> {
         return indexMap(async (index) => {
-            const context: OpalGraphQLContext = values[this.#contextStepId]!.at(index);
+            const context: OqlGraphQLContext = values[this.#contextStepId]!.at(index);
             const objectSet: ObjectSet = values[this.#objectSetStepId]!.at(index);
             const { pageSize, pageToken, orderBy }: ObjectListArgs = values[this.#argsStep]!.at(index);
 

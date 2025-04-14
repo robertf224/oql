@@ -3,7 +3,7 @@ import { LoadedRecordStep, loadOne, objectFieldSpec, Step, loadOneCallback } fro
 import { camelCase } from "change-case";
 import { GetTypeReference } from "../TypeRegistry.js";
 import { ObjectArgumentType } from "./ObjectArgumentType.js";
-import { OpalGraphQLContext, context } from "../context.js";
+import { OqlGraphQLContext, context } from "../context.js";
 import { NamedGraphQLFieldConfig } from "../NamedGraphQLFieldConfig.js";
 import { TypedOntologyObject } from "../TypedOntologyObject.js";
 import { OntologyObjectType } from "./OntologyObjectType.js";
@@ -12,7 +12,7 @@ type PrimaryKeyValue = string | number | boolean;
 
 function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): NamedGraphQLFieldConfig {
     // TODO: lift this further up
-    const loadObjects = loadOneCallback<PrimaryKeyValue, TypedOntologyObject, {}, OpalGraphQLContext>(
+    const loadObjects = loadOneCallback<PrimaryKeyValue, TypedOntologyObject, {}, OqlGraphQLContext>(
         async (ids, { attributes, unary: context }) => {
             // TODO: handle page sizes
             const objects = await OntologyObjectsV2.search(

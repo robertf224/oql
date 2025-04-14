@@ -1,4 +1,4 @@
-import base from "@valinor-enterprises/universal-build-config/eslint-base.mjs";
+import base from "@bobbyfidz/universal-build-config/eslint-base.mjs";
 
 export default [
     ...base,

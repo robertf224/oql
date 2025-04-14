@@ -7,7 +7,7 @@ import type {
 import { assertNever } from "@valinor-enterprises/assertions";
 import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLOutputType, GraphQLString } from "graphql";
 import { objectFieldSpec, ObjectStep } from "grafast";
-import { Result } from "../../utils/Result.js";
+import { Result } from "@bobbyfidz/result";
 import { NamedGraphQLFieldConfig } from "../NamedGraphQLFieldConfig.js";
 import { Schemas } from "../Schemas.js";
 
