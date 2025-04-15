@@ -1,12 +1,21 @@
-import type { ObjectTypeApiName, ObjectTypeFullMetadata, ObjectTypeV2 } from "@osdk/foundry.ontologies";
+import type {
+    ObjectTypeApiName,
+    ObjectTypeFullMetadata,
+    ObjectTypeV2,
+    OntologyFullMetadata,
+} from "@osdk/foundry.ontologies";
 import { objectSpec } from "grafast";
 import { GraphQLObjectType } from "graphql";
 import { ObjectPropertyField } from "./ObjectPropertyField.js";
 import { GetTypeReference, TypeRegistry } from "../TypeRegistry.js";
-import { Result } from "../../utils/Result.js";
+import { Result } from "@bobbyfidz/result";
 import { ObjectLinkField } from "./ObjectLinkField.js";
 
-function create(typeRegistry: TypeRegistry, objectType: ObjectTypeFullMetadata): GraphQLObjectType {
+function create(
+    typeRegistry: TypeRegistry,
+    objectType: ObjectTypeFullMetadata,
+    ontology: OntologyFullMetadata
+): GraphQLObjectType {
     const typeName = getName(objectType.objectType);
     return new GraphQLObjectType(
         objectSpec({
@@ -19,7 +28,13 @@ function create(typeRegistry: TypeRegistry, objectType: ObjectTypeFullMetadata):
                     .filter(Result.isOk)
                     .map(Result.unwrap);
                 const linkFields = objectType.linkTypes.map((linkType) =>
-                    ObjectLinkField.create(typeName, getTypeReference, linkType)
+                    ObjectLinkField.create(
+                        typeName,
+                        getTypeReference,
+                        linkType,
+                        objectType.objectType,
+                        ontology
+                    )
                 );
                 return Object.fromEntries([...propertyFields, ...linkFields]);
             }),

@@ -12,7 +12,7 @@ function create(ontology: OntologyFullMetadata): GraphQLSchema {
     const typeRegistry = new TypeRegistry();
 
     const ontologyTypes = Object.values(ontology.objectTypes).flatMap((objectType) => [
-        OntologyObjectType.create(typeRegistry, objectType),
+        OntologyObjectType.create(typeRegistry, objectType, ontology),
         ObjectSetType.create(typeRegistry, objectType),
         ObjectListTypes.createPageType(typeRegistry, objectType.objectType),
         ObjectListTypes.createEdgeType(typeRegistry, objectType.objectType),
@@ -35,6 +35,6 @@ function create(ontology: OntologyFullMetadata): GraphQLSchema {
     });
 }
 
-export const OqlGraphQLSchema = {
+export const GoqlSchema = {
     create,
 };

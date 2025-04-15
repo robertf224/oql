@@ -37,7 +37,7 @@ export interface ObjectListArgs {
 // relevance or fields
 // if fields, field + direction(asc or desc)
 
-class LoadedObjectStep extends Step<TypedOntologyObject> {
+export class LoadedObjectStep extends Step<TypedOntologyObject> {
     static $$export = {
         moduleName: "@bobbyfidz/oql-graphql-schema",
         exportName: "LoadedObjectStep",
@@ -120,12 +120,9 @@ class ObjectListStep extends Step<ObjectListStepData> {
             );
 
             return {
-                data: data.map((object) => ({
-                    $objectType: this.#objectType,
-                    ...object,
-                })),
+                data: data as TypedOntologyObject[],
                 nextPageToken,
-            } satisfies ObjectListStepData;
+            };
         });
     }
 

@@ -1,4 +1,6 @@
 // gql
+
+/*
 export interface OperationDefinitionNode {
     readonly kind: Kind.OPERATION_DEFINITION;
     readonly loc?: Location;
@@ -13,8 +15,6 @@ export interface FragmentDefinitionNode {
     readonly kind: Kind.FRAGMENT_DEFINITION;
     readonly loc?: Location;
     readonly name: NameNode;
-    /** @deprecated variableDefinitions will be removed in v17.0.0 */
-    readonly variableDefinitions?: ReadonlyArray<VariableDefinitionNode>;
     readonly typeCondition: NamedTypeNode;
     readonly directives?: ReadonlyArray<DirectiveNode>;
     readonly selectionSet: SelectionSetNode;
@@ -52,3 +52,4 @@ export interface InlineFragmentNode {
     readonly directives?: ReadonlyArray<DirectiveNode>;
     readonly selectionSet: SelectionSetNode;
 }
+*/
