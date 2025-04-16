@@ -1,11 +1,20 @@
 import { User } from "@osdk/foundry.admin";
-import { LoadedRecordStep, nodeIdFromNode, NodeIdHandler, objectSpec, ObjectTypeFields } from "grafast";
+import {
+    LoadedRecordStep,
+    loadOne,
+    nodeIdFromNode,
+    NodeIdHandler,
+    objectSpec,
+    ObjectTypeFields,
+} from "grafast";
 import { GraphQLID, GraphQLObjectType, GraphQLString } from "graphql";
 import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
 import { Schemas } from "../utils/Schemas.js";
 import { NodeInterface } from "../NodeInterface.js";
 import { NodeField } from "../NodeField.js";
 import { UserLoader } from "./UserLoader.js";
+import { context } from "../context.js";
+import { UserProfilePictureLoader } from "./UserProfilePictureLoader.js";
 
 const TYPE_NAME = "User";
 
@@ -24,25 +33,32 @@ function create(typeRegistry: TypeRegistry): GraphQLObjectType {
                     },
                 },
                 id: {
-                    type: Schemas.required(GraphQLString),
                     description: "The unique identifier for the User.",
+                    type: Schemas.required(GraphQLString),
                 },
                 username: {
-                    type: Schemas.required(GraphQLString),
                     description: "The unique username for the User.",
+                    type: Schemas.required(GraphQLString),
                 },
                 givenName: {
-                    type: GraphQLString,
                     description: "The given name of the User.",
+                    type: GraphQLString,
                 },
                 familyName: {
-                    type: GraphQLString,
                     description: "The family name (last name) of the User.",
+                    type: GraphQLString,
                 },
                 email: {
-                    type: GraphQLString,
                     description:
                         "The email at which to contact a User. Multiple Users may have the same email address.",
+                    type: GraphQLString,
+                },
+                profilePictureUrl: {
+                    description: "The URL of the User's profile picture.",
+                    type: GraphQLString,
+                    plan: ($user) => {
+                        return loadOne($user.get("id"), context(), UserProfilePictureLoader);
+                    },
                 },
             },
             interfaces: typeRegistry.use((getTypeReference) => [

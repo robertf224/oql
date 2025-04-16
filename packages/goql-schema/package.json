@@ -28,6 +28,7 @@
     },
     "devDependencies": {
         "@bobbyfidz/universal-build-config": "^0.1.0",
+        "@types/node": "^20.17.30",
         "eslint": "^9.21.0",
         "typescript": "~5.8.2"
     }

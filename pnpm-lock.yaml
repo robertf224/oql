@@ -115,6 +115,9 @@ importers:
       '@bobbyfidz/universal-build-config':
         specifier: ^0.1.0
         version: 0.1.0(eslint@9.24.0)(typescript@5.8.3)
+      '@types/node':
+        specifier: ^20.17.30
+        version: 20.17.30
       eslint:
         specifier: ^9.21.0
         version: 9.24.0
