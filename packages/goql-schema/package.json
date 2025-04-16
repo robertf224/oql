@@ -12,6 +12,7 @@
         "lint": "eslint"
     },
     "dependencies": {
+        "@bobbyfidz/base64": "^0.1.1",
         "@bobbyfidz/private-oms-api": "file:../../bobbyfidz-private-oms-api-0.0.0.tgz",
         "@bobbyfidz/result": "^0.1.0",
         "@osdk/client": "^2.1.2",

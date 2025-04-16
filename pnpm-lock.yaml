@@ -72,6 +72,9 @@ importers:
 
   packages/goql-schema:
     dependencies:
+      '@bobbyfidz/base64':
+        specifier: ^0.1.1
+        version: 0.1.1
       '@bobbyfidz/private-oms-api':
         specifier: file:../../bobbyfidz-private-oms-api-0.0.0.tgz
         version: file:bobbyfidz-private-oms-api-0.0.0.tgz
@@ -152,12 +155,18 @@ packages:
     resolution: {integrity: sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==}
     engines: {node: '>=6.9.0'}
 
+  '@bobbyfidz/base64@0.1.1':
+    resolution: {integrity: sha512-vu954z/Jk+mmglT+YNG0XMPKX25qeeWTsRM/IfgZTh4dAionZ7nEVZ8Ws7v7eMjgPyyzllIpDx6jo+ekBWkdxg==}
+
   '@bobbyfidz/private-oms-api@file:bobbyfidz-private-oms-api-0.0.0.tgz':
     resolution: {integrity: sha512-IRJa1L52yjmYj+BACoe8dwoBdJHDzapzCs795UKH9NjwycFHArHWwjmRNE1olMYJf8f6gL0+rG1sslhcyt1vHA==, tarball: file:bobbyfidz-private-oms-api-0.0.0.tgz}
     version: 0.0.0
 
   '@bobbyfidz/result@0.1.0':
     resolution: {integrity: sha512-fFSVB4R6H7NGZLmhklHBOavMM1UElgRaTiyPWPVivYBjnIWsqrChwwfyRELgvp8OZlbHm2t4vCiz5lVey3Vd0Q==}
+
+  '@bobbyfidz/result@0.2.0':
+    resolution: {integrity: sha512-rmbuWcSK9bbJzuRW/oyoulGyc7QzOqkF8/CAtqBVYggYXBdmgRNG+ZkSg+fw5drQgncLC9FbfF0nLMelj40UFQ==}
 
   '@bobbyfidz/universal-build-config@0.1.0':
     resolution: {integrity: sha512-DIT6cQQ2+MAmRNgPJZQkzNfRVM6fnuc4nXmdbodlQCUw2KiF2u7qJmYWIl1dCGhylBXdA12pGm1YjOaYkebF0w==}
@@ -1862,11 +1871,17 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
+  '@bobbyfidz/base64@0.1.1':
+    dependencies:
+      '@bobbyfidz/result': 0.2.0
+
   '@bobbyfidz/private-oms-api@file:bobbyfidz-private-oms-api-0.0.0.tgz':
     dependencies:
       conjure-client: 2.14.0
 
   '@bobbyfidz/result@0.1.0': {}
+
+  '@bobbyfidz/result@0.2.0': {}
 
   '@bobbyfidz/universal-build-config@0.1.0(eslint@9.24.0)(typescript@5.8.3)':
     dependencies:

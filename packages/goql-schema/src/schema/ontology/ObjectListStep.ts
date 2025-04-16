@@ -7,7 +7,6 @@ import {
     object,
     Step,
     __ItemStep,
-    ObjectStep,
     Maybe,
 } from "grafast";
 import {
@@ -30,12 +29,10 @@ export interface ObjectListArgs {
     pageSize?: number;
     pageToken?: string;
     orderBy?: {
+        // TODO: add relevance option
         fields: { field: PropertyApiName; direction: "asc" | "desc" }[];
     };
 }
-
-// relevance or fields
-// if fields, field + direction(asc or desc)
 
 export class LoadedObjectStep extends Step<TypedOntologyObject> {
     static $$export = {

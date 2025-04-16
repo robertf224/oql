@@ -1,6 +1,6 @@
-import { GraphQLBoolean, GraphQLObjectType, GraphQLString } from "graphql";
-import { GetTypeReference, TypeRegistry } from "./TypeRegistry.js";
-import { Schemas } from "./Schemas.js";
+import { GraphQLBoolean, GraphQLFieldConfig, GraphQLObjectType, GraphQLString } from "graphql";
+import { GetTypeReference, TypeRegistry } from "./utils/TypeRegistry.js";
+import { Schemas } from "./utils/Schemas.js";
 
 export interface PageInfo {
     hasNextPage: boolean;
@@ -30,7 +30,7 @@ function createPageType(
     return new GraphQLObjectType({
         name: getPageTypeName(typeName),
         description: `A page of ${pluralDisplayName}.`,
-        fields: typeRegistry.use((getTypeReference) => ({
+        fields: typeRegistry.use<GraphQLFieldConfig<any, any, any>>((getTypeReference) => ({
             edges: {
                 description: `A list of ${pluralDisplayName}.`,
                 type: Schemas.list(getTypeReference(getEdgeTypeName(typeName)) as GraphQLObjectType),

@@ -1,4 +1,4 @@
-import { lambda, loadOne, objectFieldSpec, Step } from "grafast";
+import { loadOne, objectFieldSpec, Step } from "grafast";
 import { User } from "@osdk/foundry.admin";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { GetTypeReference } from "../utils/TypeRegistry.js";
@@ -7,7 +7,6 @@ import { context } from "../context.js";
 import { Schemas } from "../utils/Schemas.js";
 import { GraphQLString } from "graphql";
 import { UserLoader } from "./UserLoader.js";
-import { getUserIdFromToken } from "../utils/getUserIdFromToken.js";
 
 function create(getTypeReference: GetTypeReference): NamedGraphQLFieldConfig[] {
     const viewer: NamedGraphQLFieldConfig = [

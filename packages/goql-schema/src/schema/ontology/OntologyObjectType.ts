@@ -4,13 +4,35 @@ import type {
     ObjectTypeV2,
     OntologyFullMetadata,
 } from "@osdk/foundry.ontologies";
-import { GraphQLObjectType } from "graphql";
+import { Result } from "@bobbyfidz/result";
+import { GraphQLID, GraphQLObjectType } from "graphql";
 import { ObjectPropertyField } from "./ObjectPropertyField.js";
 import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
-import { Result } from "@bobbyfidz/result";
 import { ObjectLinkField } from "./ObjectLinkField.js";
 import { UserProperties } from "../utils/getUserProperties.js";
 import { ObjectUserLinkField } from "./ObjectUserLinkField.js";
+import { NodeInterface } from "../NodeInterface.js";
+import { Schemas } from "../utils/Schemas.js";
+import { LoadedRecordStep, nodeIdFromNode, NodeIdHandler, objectFieldSpec } from "grafast";
+import { LoadedObjectStep } from "./ObjectListStep.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { NodeField } from "../NodeField.js";
+import { getObjectLoader } from "./getObjectLoader.js";
+
+const nodeIdHandlerCache = new WeakMap<ObjectTypeV2, NodeIdHandler>();
+function getNodeIdHandler(objectType: ObjectTypeV2): NodeIdHandler {
+    let handler = nodeIdHandlerCache.get(objectType);
+    if (handler) {
+        return handler;
+    }
+    handler = NodeField.createBasicHandler(
+        objectType.apiName,
+        objectType.primaryKey,
+        getObjectLoader(objectType)
+    );
+    nodeIdHandlerCache.set(objectType, handler);
+    return handler;
+}
 
 function create(
     typeRegistry: TypeRegistry,
@@ -23,6 +45,15 @@ function create(
         name: typeName,
         description: objectType.objectType.description,
         fields: typeRegistry.use((getTypeReference) => {
+            const idField = objectFieldSpec<LoadedRecordStep<TypedOntologyObject> | LoadedObjectStep>(
+                {
+                    type: Schemas.required(GraphQLID),
+                    plan: ($object) => {
+                        return nodeIdFromNode(getNodeIdHandler(objectType.objectType), $object);
+                    },
+                },
+                `${typeName}.${NodeInterface.FIELD_NAME}`
+            );
             const propertyFields = Object.entries(objectType.objectType.properties)
                 .map((property) => ObjectPropertyField.create(typeName, property))
                 // TODO: handle errors
@@ -34,8 +65,14 @@ function create(
             const userLinkFields = Object.entries(objectType.objectType.properties)
                 .filter(([_, property]) => userProperties[property.rid])
                 .map((property) => ObjectUserLinkField.create(typeName, getTypeReference, property));
-            return Object.fromEntries([...propertyFields, ...linkFields, ...userLinkFields]);
+            return Object.fromEntries([
+                [NodeInterface.FIELD_NAME, idField],
+                ...propertyFields,
+                ...linkFields,
+                ...userLinkFields,
+            ]);
         }),
+        interfaces: typeRegistry.use((getTypeReference) => [NodeInterface.getReference(getTypeReference)]),
     });
 }
 
@@ -58,4 +95,5 @@ export const OntologyObjectType = {
     create,
     getReference,
     getReferenceByName,
+    getNodeIdHandler,
 };
