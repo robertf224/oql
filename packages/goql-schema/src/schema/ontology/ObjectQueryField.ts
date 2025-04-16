@@ -1,11 +1,11 @@
 import { ObjectTypeV2 } from "@osdk/foundry.ontologies";
 import { LoadedRecordStep, loadOne, objectFieldSpec, Step } from "grafast";
 import { camelCase } from "change-case";
-import { GetTypeReference } from "../TypeRegistry.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { ObjectArgumentType } from "./ObjectArgumentType.js";
 import { context } from "../context.js";
-import { NamedGraphQLFieldConfig } from "../NamedGraphQLFieldConfig.js";
-import { TypedOntologyObject } from "../TypedOntologyObject.js";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 import { OntologyObjectType } from "./OntologyObjectType.js";
 import { getObjectLoader } from "./getObjectLoader.js";
 

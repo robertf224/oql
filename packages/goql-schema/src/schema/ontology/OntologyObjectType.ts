@@ -4,42 +4,39 @@ import type {
     ObjectTypeV2,
     OntologyFullMetadata,
 } from "@osdk/foundry.ontologies";
-import { objectSpec } from "grafast";
 import { GraphQLObjectType } from "graphql";
 import { ObjectPropertyField } from "./ObjectPropertyField.js";
-import { GetTypeReference, TypeRegistry } from "../TypeRegistry.js";
+import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
 import { Result } from "@bobbyfidz/result";
 import { ObjectLinkField } from "./ObjectLinkField.js";
+import { UserProperties } from "../utils/getUserProperties.js";
+import { ObjectUserLinkField } from "./ObjectUserLinkField.js";
 
 function create(
     typeRegistry: TypeRegistry,
     objectType: ObjectTypeFullMetadata,
-    ontology: OntologyFullMetadata
+    ontology: OntologyFullMetadata,
+    userProperties: UserProperties
 ): GraphQLObjectType {
     const typeName = getName(objectType.objectType);
-    return new GraphQLObjectType(
-        objectSpec({
-            name: typeName,
-            description: objectType.objectType.description,
-            fields: typeRegistry.use((getTypeReference) => {
-                const propertyFields = Object.entries(objectType.objectType.properties)
-                    .map((property) => ObjectPropertyField.create(typeName, property))
-                    // TODO: handle errors
-                    .filter(Result.isOk)
-                    .map(Result.unwrap);
-                const linkFields = objectType.linkTypes.map((linkType) =>
-                    ObjectLinkField.create(
-                        typeName,
-                        getTypeReference,
-                        linkType,
-                        objectType.objectType,
-                        ontology
-                    )
-                );
-                return Object.fromEntries([...propertyFields, ...linkFields]);
-            }),
-        })
-    );
+    return new GraphQLObjectType({
+        name: typeName,
+        description: objectType.objectType.description,
+        fields: typeRegistry.use((getTypeReference) => {
+            const propertyFields = Object.entries(objectType.objectType.properties)
+                .map((property) => ObjectPropertyField.create(typeName, property))
+                // TODO: handle errors
+                .filter(Result.isOk)
+                .map(Result.unwrap);
+            const linkFields = objectType.linkTypes.map((linkType) =>
+                ObjectLinkField.create(typeName, getTypeReference, linkType, objectType.objectType, ontology)
+            );
+            const userLinkFields = Object.entries(objectType.objectType.properties)
+                .filter(([_, property]) => userProperties[property.rid])
+                .map((property) => ObjectUserLinkField.create(typeName, getTypeReference, property));
+            return Object.fromEntries([...propertyFields, ...linkFields, ...userLinkFields]);
+        }),
+    });
 }
 
 function getName(objectType: ObjectTypeV2): string {

@@ -12,13 +12,18 @@
         "lint": "eslint"
     },
     "dependencies": {
+        "@bobbyfidz/private-oms-api": "file:../../bobbyfidz-private-oms-api-0.0.0.tgz",
         "@bobbyfidz/result": "^0.1.0",
         "@osdk/client": "^2.1.2",
+        "@osdk/foundry.admin": "^2.17.0",
+        "@osdk/foundry.core": "^2.17.0",
         "@osdk/foundry.ontologies": "^2.17.0",
         "@valinor-enterprises/assertions": "^0.2.0",
         "change-case": "^5.4.4",
+        "conjure-client": "^2.14.0",
         "grafast": "^0.1.1-beta.21",
-        "graphql": "^16.10.0"
+        "graphql": "^16.10.0",
+        "jose": "^6.0.10"
     },
     "devDependencies": {
         "@bobbyfidz/universal-build-config": "^0.1.0",

@@ -18,8 +18,8 @@ import {
     SelectedPropertyApiName,
 } from "@osdk/foundry.ontologies";
 import { assert } from "@valinor-enterprises/assertions";
-import { TypedOntologyObject } from "../TypedOntologyObject.js";
-import { OqlGraphQLContext, context } from "../context.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { GoqlContext, context } from "../context.js";
 
 export interface ObjectListStepData {
     data: TypedOntologyObject[];
@@ -102,7 +102,7 @@ class ObjectListStep extends Step<ObjectListStepData> {
 
     execute({ values, indexMap }: ExecutionDetails): ExecutionResults<ObjectListStepData> {
         return indexMap(async (index) => {
-            const context: OqlGraphQLContext = values[this.#contextStepId]!.at(index);
+            const context: GoqlContext = values[this.#contextStepId]!.at(index);
             const objectSet: ObjectSet = values[this.#objectSetStepId]!.at(index);
             const { pageSize, pageToken, orderBy }: ObjectListArgs = values[this.#argsStep]!.at(index);
 

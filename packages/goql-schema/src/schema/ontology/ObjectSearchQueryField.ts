@@ -1,8 +1,8 @@
 import { constant, Step } from "grafast";
 import { camelCase } from "change-case";
-import { GetTypeReference } from "../TypeRegistry.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { ObjectSet, ObjectTypeV2 } from "@osdk/foundry.ontologies";
-import { NamedGraphQLFieldConfig } from "../NamedGraphQLFieldConfig.js";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { objectFieldSpec } from "grafast";
 import { ObjectSetType } from "./ObjectSetType.js";
 

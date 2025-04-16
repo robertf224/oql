@@ -8,9 +8,9 @@ import { assertNever } from "@valinor-enterprises/assertions";
 import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLOutputType, GraphQLString } from "graphql";
 import { LoadedRecordStep, objectFieldSpec, ObjectStep } from "grafast";
 import { Result } from "@bobbyfidz/result";
-import { NamedGraphQLFieldConfig } from "../NamedGraphQLFieldConfig.js";
-import { Schemas } from "../Schemas.js";
-import { TypedOntologyObject } from "../TypedOntologyObject.js";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
+import { Schemas } from "../utils/Schemas.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 import { LoadedObjectStep } from "./ObjectListStep.js";
 
 function getGraphqlFieldType(type: ObjectPropertyType): Result<GraphQLOutputType> {

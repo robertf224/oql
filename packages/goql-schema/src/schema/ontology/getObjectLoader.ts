@@ -1,9 +1,9 @@
 import { PrimaryKeyValue, OntologyObjectsV2, PropertyApiName, ObjectTypeV2 } from "@osdk/foundry.ontologies";
 import { LoadOneCallback, loadOneCallback } from "grafast";
-import { OqlGraphQLContext } from "../context.js";
-import { TypedOntologyObject } from "../TypedOntologyObject.js";
+import { GoqlContext } from "../context.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 
-type ObjectLoader = LoadOneCallback<PrimaryKeyValue, TypedOntologyObject, {}, OqlGraphQLContext>;
+type ObjectLoader = LoadOneCallback<PrimaryKeyValue, TypedOntologyObject, {}, GoqlContext>;
 
 const cache = new WeakMap<ObjectTypeV2, ObjectLoader>();
 
@@ -13,7 +13,7 @@ export function getObjectLoader(objectType: ObjectTypeV2): ObjectLoader {
         return loader;
     }
 
-    loader = loadOneCallback<PrimaryKeyValue, TypedOntologyObject, {}, OqlGraphQLContext>(
+    loader = loadOneCallback<PrimaryKeyValue, TypedOntologyObject, {}, GoqlContext>(
         async (ids, { attributes, unary: context }) => {
             // TODO: handle page sizes
             const { data } = await OntologyObjectsV2.search(
@@ -37,6 +37,5 @@ export function getObjectLoader(objectType: ObjectTypeV2): ObjectLoader {
     );
 
     cache.set(objectType, loader);
-
     return loader;
 }

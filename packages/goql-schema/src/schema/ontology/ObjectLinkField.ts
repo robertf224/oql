@@ -1,12 +1,12 @@
 import type { LinkTypeSideV2, ObjectSet, ObjectTypeV2, OntologyFullMetadata } from "@osdk/foundry.ontologies";
 import { lambda, LoadedRecordStep, loadOne, objectFieldSpec, ObjectStep } from "grafast";
-import { NamedGraphQLFieldConfig } from "../NamedGraphQLFieldConfig.js";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { ObjectSetType } from "./ObjectSetType.js";
-import { GetTypeReference } from "../TypeRegistry.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { OntologyObjectType } from "./OntologyObjectType.js";
 import { assertNever } from "@valinor-enterprises/assertions";
 import { GraphQLFieldConfig } from "graphql";
-import { TypedOntologyObject } from "../TypedOntologyObject.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 import { context } from "../context.js";
 import { LoadedObjectStep } from "./ObjectListStep.js";
 import { getObjectLoader } from "./getObjectLoader.js";

@@ -1,23 +1,19 @@
 import { createServer } from "node:http";
 import { grafserv } from "grafserv/node";
-import { OntologiesV2 } from "@osdk/foundry.ontologies";
-import { GoqlSchema } from "@bobbyfidz/goql-schema";
+import { ExecutableGoqlSchema } from "@bobbyfidz/goql-schema";
 import { getFoundryClient } from "./getFoundryClient.js";
 
 // TODO: switch to Hono when integration is available
 
 export async function start() {
     const client = getFoundryClient();
-    const ontology = await OntologiesV2.getFullMetadata(client, process.env.FOUNDRY_ONTOLOGY_RID!);
+    const { schema, context } = await ExecutableGoqlSchema.create(client, () => client);
 
     const serv = grafserv({
-        schema: GoqlSchema.create(ontology),
+        schema,
         preset: {
             grafast: {
-                context: {
-                    client,
-                    ontologyRid: process.env.FOUNDRY_ONTOLOGY_RID!,
-                },
+                context,
                 explain: true,
             },
             grafserv: {

@@ -1,6 +1,6 @@
 import { GraphQLBoolean, GraphQLInputType, GraphQLInt, GraphQLScalarType, GraphQLString } from "graphql";
 import type { ObjectTypeV2 } from "@osdk/foundry.ontologies";
-import { Schemas } from "../Schemas.js";
+import { Schemas } from "../utils/Schemas.js";
 
 function getScalarType(objectType: ObjectTypeV2): GraphQLScalarType {
     const primaryKeyProperty = objectType.properties[objectType.primaryKey]!;
