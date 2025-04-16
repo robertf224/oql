@@ -1,13 +1,13 @@
 import { GraphQLID, GraphQLInterfaceType } from "graphql";
-import { GetTypeReference } from "./utils/TypeRegistry.js";
-import { Schemas } from "./utils/Schemas.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
+import { Schemas } from "../utils/Schemas.js";
 
 const TYPE_NAME = "Node";
 
 /**
  * We use _id rather than `id` because:
  * - it aligns with Foundry's internal GraphQL gateway which we should converge with over time.
- * - we avoid collisions with actual property API names which must start with a letter.
+ * - we will generally avoid collisions with actual property API names.
  * - Relay can actually handle this now (https://github.com/facebook/relay/issues/3897).
  */
 const FIELD_NAME = "_id" as const;

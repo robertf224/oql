@@ -31,8 +31,10 @@ export function getObjectLoader(objectType: ObjectTypeV2): ObjectLoader {
                     excludeRid: true,
                 }
             );
-            // TODO: make sure we properly join up objects in the correct order
-            return data as TypedOntologyObject[];
+            const objectsMap = Object.fromEntries(
+                (data as TypedOntologyObject[]).map((object) => [object.__primaryKey, object])
+            );
+            return ids.map((id) => objectsMap[id]);
         }
     );
 

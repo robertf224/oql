@@ -146,11 +146,15 @@ export function objectListConnection(
     const objectListStep = new ObjectListStep(
         objectType,
         $objectSet,
-        lambda($args, (args) => ({
-            pageSize: args.first ?? undefined,
-            pageToken: args.after ?? undefined,
-            orderBy: args.orderBy ?? undefined,
-        }))
+        lambda(
+            $args,
+            (args) => ({
+                pageSize: args.first ?? undefined,
+                pageToken: args.after ?? undefined,
+                orderBy: args.orderBy ?? undefined,
+            }),
+            true
+        )
     );
     return object({
         pageInfo: object({

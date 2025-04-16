@@ -11,13 +11,13 @@ import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
 import { ObjectLinkField } from "./ObjectLinkField.js";
 import { UserProperties } from "../utils/getUserProperties.js";
 import { ObjectUserLinkField } from "./ObjectUserLinkField.js";
-import { NodeInterface } from "../NodeInterface.js";
+import { NodeInterface } from "../nodes/NodeInterface.js";
 import { Schemas } from "../utils/Schemas.js";
 import { LoadedRecordStep, nodeIdFromNode, NodeIdHandler, objectFieldSpec } from "grafast";
 import { LoadedObjectStep } from "./ObjectListStep.js";
 import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
-import { NodeField } from "../NodeField.js";
 import { getObjectLoader } from "./getObjectLoader.js";
+import { NodeHandlers } from "../nodes/NodeHandlers.js";
 
 const nodeIdHandlerCache = new WeakMap<ObjectTypeV2, NodeIdHandler>();
 function getNodeIdHandler(objectType: ObjectTypeV2): NodeIdHandler {
@@ -25,7 +25,7 @@ function getNodeIdHandler(objectType: ObjectTypeV2): NodeIdHandler {
     if (handler) {
         return handler;
     }
-    handler = NodeField.createBasicHandler(
+    handler = NodeHandlers.createBasicHandler(
         objectType.apiName,
         objectType.primaryKey,
         getObjectLoader(objectType)

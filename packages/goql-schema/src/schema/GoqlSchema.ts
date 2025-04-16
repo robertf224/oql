@@ -1,6 +1,7 @@
 import { GraphQLObjectType } from "graphql";
 import { GraphQLSchema } from "graphql";
 import type { OntologyFullMetadata } from "@osdk/foundry.ontologies";
+import { Result } from "@bobbyfidz/result";
 import { OntologyQueryFields } from "./ontology/OntologyQueryFields.js";
 import { TypeRegistry } from "./utils/TypeRegistry.js";
 import { OntologyObjectType } from "./ontology/OntologyObjectType.js";
@@ -10,8 +11,11 @@ import { ObjectListTypes } from "./ontology/ObjectListTypes.js";
 import { UserType } from "./admin/UserType.js";
 import { UserQueryFields } from "./admin/UserQueryFields.js";
 import { UserProperties } from "./utils/getUserProperties.js";
-import { NodeInterface } from "./NodeInterface.js";
-import { NodeField } from "./NodeField.js";
+import { NodeInterface } from "./nodes/NodeInterface.js";
+import { NodeField } from "./nodes/NodeField.js";
+import { ActionField } from "./ontology/ActionField.js";
+import { ObjectSetFilterType } from "./ontology/ObjectSetFilterType.js";
+import { StringFilterType } from "./filters/StringFilterType.js";
 
 function create(ontology: OntologyFullMetadata, userProperties: UserProperties = {}): GraphQLSchema {
     const typeRegistry = new TypeRegistry();
@@ -20,6 +24,7 @@ function create(ontology: OntologyFullMetadata, userProperties: UserProperties =
         .flatMap((objectType) => [
             OntologyObjectType.create(typeRegistry, objectType, ontology, userProperties),
             ObjectSetType.create(typeRegistry, objectType),
+            ObjectSetFilterType.create(typeRegistry, objectType),
             ObjectListTypes.createPageType(typeRegistry, objectType.objectType),
             ObjectListTypes.createEdgeType(typeRegistry, objectType.objectType),
             ObjectListTypes.createOrderByType(typeRegistry, objectType.objectType),
@@ -30,7 +35,15 @@ function create(ontology: OntologyFullMetadata, userProperties: UserProperties =
 
     const adminTypes = [UserType.create(typeRegistry)];
 
-    const types = [...ontologyTypes, ...adminTypes, ListTypes.PageInfoType, NodeInterface.create()];
+    const filterTypes = [StringFilterType.create()];
+
+    const types = [
+        ...ontologyTypes,
+        ...adminTypes,
+        ListTypes.PageInfoType,
+        NodeInterface.create(),
+        ...filterTypes,
+    ];
     types.forEach(typeRegistry.register);
 
     return new GraphQLSchema({
@@ -46,6 +59,18 @@ function create(ontology: OntologyFullMetadata, userProperties: UserProperties =
                             OntologyObjectType.getNodeIdHandler(objectType.objectType)
                         ),
                     ]),
+                ])
+            ),
+        }),
+        mutation: new GraphQLObjectType({
+            name: "Mutation",
+            fields: typeRegistry.use((getTypeReference) =>
+                Object.fromEntries([
+                    ...Object.values(ontology.actionTypes)
+                        .map((actionType) => ActionField.create(getTypeReference, actionType, ontology))
+                        // TODO: handle errors.
+                        .filter(Result.isOk)
+                        .map(Result.unwrap),
                 ])
             ),
         }),

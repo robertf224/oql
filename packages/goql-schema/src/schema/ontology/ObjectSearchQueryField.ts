@@ -1,10 +1,11 @@
-import { constant, Step } from "grafast";
+import { constant, lambda, Step } from "grafast";
 import { camelCase } from "change-case";
 import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { ObjectSet, ObjectTypeV2 } from "@osdk/foundry.ontologies";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { objectFieldSpec } from "grafast";
 import { ObjectSetType } from "./ObjectSetType.js";
+import { ObjectSetFilterType } from "./ObjectSetFilterType.js";
 
 function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): NamedGraphQLFieldConfig {
     const fieldName = `${camelCase(objectType.apiName)}Search`;
@@ -13,13 +14,31 @@ function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): N
         {
             description: `Search or list ${objectType.pluralDisplayName}.`,
             // TODO: deprecation
-            // TODO: args
+            args: {
+                where: {
+                    description: `Filter for the set of ${objectType.pluralDisplayName}.`,
+                    type: ObjectSetFilterType.getReference(getTypeReference, objectType),
+                },
+            },
             type: ObjectSetType.getReference(getTypeReference, objectType),
-            plan: () => {
-                return constant<ObjectSet>({
-                    type: "base",
-                    objectType: objectType.apiName,
-                });
+            plan: (_$query, $args) => {
+                return lambda(
+                    $args.getRaw(),
+                    (args) => {
+                        let objectSet: ObjectSet = {
+                            type: "base",
+                            objectType: objectType.apiName,
+                        };
+                        if (args.where) {
+                            const filter = ObjectSetFilterType.toObjectSetFilter(objectType, args.where);
+                            if (filter) {
+                                objectSet = { type: "filter", objectSet, where: filter };
+                            }
+                        }
+                        return objectSet;
+                    },
+                    true
+                );
             },
         },
         `Query.${fieldName}`

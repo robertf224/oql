@@ -23,7 +23,8 @@ function create(
                         type: "searchAround",
                         link: linkType.apiName,
                         objectSet,
-                    })
+                    }),
+                    true
                 );
             },
         },

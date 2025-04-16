@@ -61,7 +61,8 @@ function create(
                                 field: foreignKeyPropertyApiName,
                                 value: primaryKey,
                             },
-                        })
+                        }),
+                        true
                     );
                 },
             },

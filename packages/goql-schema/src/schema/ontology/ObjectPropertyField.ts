@@ -13,12 +13,12 @@ import { Schemas } from "../utils/Schemas.js";
 import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 import { LoadedObjectStep } from "./ObjectListStep.js";
 
-function getGraphqlFieldType(type: ObjectPropertyType): Result<GraphQLOutputType> {
+function getFieldType(type: ObjectPropertyType): Result<GraphQLOutputType> {
     // TODO: wrap w/ required when property is required
     // TODO: consider data constraints + value types
     switch (type.type) {
         case "array":
-            return Result.map(getGraphqlFieldType(type.subType), Schemas.list);
+            return Result.map(getFieldType(type.subType), Schemas.list);
         case "attachment":
             return Result.err(new Error("Attachment type not supported."));
         case "boolean":
@@ -81,7 +81,7 @@ function create(
     path: string,
     [propertyApiName, property]: [PropertyApiName, PropertyV2]
 ): Result<NamedGraphQLFieldConfig> {
-    return Result.map(getGraphqlFieldType(property.dataType), (type) => {
+    return Result.map(getFieldType(property.dataType), (type) => {
         const field = objectFieldSpec<LoadedRecordStep<TypedOntologyObject> | LoadedObjectStep>(
             {
                 description: property.description,
