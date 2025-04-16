@@ -2,6 +2,7 @@ import type { ObjectTypeApiName, ObjectTypeFullMetadata, ObjectTypeV2 } from "@o
 import { GraphQLObjectType } from "graphql";
 import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
 import { ObjectListField } from "./ObjectListField.js";
+import { ObjectSetLinkField } from "./ObjectSetLinkField.js";
 
 function create(typeRegistry: TypeRegistry, objectType: ObjectTypeFullMetadata): GraphQLObjectType {
     const typeName = getName(objectType.objectType);
@@ -11,7 +12,10 @@ function create(typeRegistry: TypeRegistry, objectType: ObjectTypeFullMetadata):
         // TODO: deprecation
         fields: typeRegistry.use((getTypeReference) => {
             const listField = ObjectListField.create(typeName, getTypeReference, objectType.objectType);
-            return Object.fromEntries([listField]);
+            const linkFields = objectType.linkTypes.map((linkType) =>
+                ObjectSetLinkField.create(typeName, getTypeReference, linkType)
+            );
+            return Object.fromEntries([listField, ...linkFields]);
         }),
     });
 }
