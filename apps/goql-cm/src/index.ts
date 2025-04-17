@@ -1,9 +1,10 @@
-import { useGrafast } from "grafast/envelop";
+import { execute } from "grafast";
+import { parse, validate } from "graphql";
 import { ExecutableGoqlSchema } from "@bobbyfidz/goql-schema";
 import { ComputeModule } from "@palantir/compute-module";
 import { Type } from "@sinclair/typebox";
 import { useValidationCache } from "@envelop/validation-cache";
-import { envelop, useSchema } from "@envelop/core";
+import { envelop, useSchema, useEngine } from "@envelop/core";
 import { useParserCache } from "@envelop/parser-cache";
 import { createClient } from "@osdk/client";
 import { getFoundryClient } from "./getFoundryClient.js";
@@ -28,7 +29,12 @@ const { schema, context } = await ExecutableGoqlSchema.create(getFoundryClient()
 );
 
 const getEnveloped = envelop({
-    plugins: [useSchema(schema), useParserCache(), useValidationCache(), useGrafast()],
+    plugins: [
+        useEngine({ parse, validate, execute }),
+        useSchema(schema),
+        useParserCache(),
+        useValidationCache(),
+    ],
 });
 
 computeModule.register("graphql", async ({ query, operationName, variables, token }) => {
