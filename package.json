@@ -1,5 +1,5 @@
 {
-    "name": "@bobbyfidz/cobalt-monorepo",
+    "name": "@bobbyfidz/oql-monorepo",
     "private": true,
     "scripts": {
         "lint-versions": "syncpack list-mismatches",

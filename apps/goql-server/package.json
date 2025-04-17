@@ -1,0 +1,26 @@
+{
+    "name": "@bobbyfidz/goql-server",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc && node --env-file .env lib/index.js",
+        "lint": "eslint"
+    },
+    "dependencies": {
+        "@bobbyfidz/goql-schema": "workspace:*",
+        "@osdk/client": "^2.1.2",
+        "@osdk/oauth": "^1.1.1",
+        "@valinor-enterprises/assertions": "^0.2.0",
+        "grafast": "^0.1.1-beta.21",
+        "grafserv": "^0.1.1-beta.21"
+    },
+    "devDependencies": {
+        "@bobbyfidz/universal-build-config": "^0.1.0",
+        "@types/node": "^20.17.30",
+        "esbuild": "^0.25.2",
+        "eslint": "^9.21.0",
+        "typescript": "~5.8.2"
+    }
+}
