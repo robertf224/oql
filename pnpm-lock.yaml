@@ -73,7 +73,7 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(eslint@9.24.0)(typescript@5.8.3)
       '@types/node':
-        specifier: ^20.17.14
+        specifier: ^20.17.30
         version: 20.17.30
       esbuild:
         specifier: ^0.25.2
@@ -110,7 +110,7 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(eslint@9.24.0)(typescript@5.8.3)
       '@types/node':
-        specifier: ^20.17.14
+        specifier: ^20.17.30
         version: 20.17.30
       esbuild:
         specifier: ^0.25.2
