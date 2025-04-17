@@ -14,7 +14,7 @@ FROM base AS build
 WORKDIR /app
 RUN npm install -g pnpm@9.6.0
 COPY --from=setup /app/out/json/ .
-COPY @bobbyfidz-private-oms-api-0.0.0.tgz .
+COPY bobbyfidz-private-oms-api-0.0.0.tgz .
 RUN pnpm install --frozen-lockfile
 COPY --from=setup /app/out/full/ .
 RUN pnpm turbo run build
