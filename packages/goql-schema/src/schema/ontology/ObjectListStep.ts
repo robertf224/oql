@@ -1,17 +1,6 @@
-import {
-    access,
-    each,
-    ExecutionDetails,
-    ExecutionResults,
-    lambda,
-    object,
-    Step,
-    __ItemStep,
-    Maybe,
-} from "grafast";
+import { access, each, ExecutionDetails, ExecutionResults, lambda, object, Step, Maybe } from "grafast";
 import {
     ObjectSet,
-    ObjectTypeV2,
     OntologyObjectSets,
     PropertyApiName,
     SelectedPropertyApiName,
@@ -62,7 +51,7 @@ export class LoadedObjectStep extends Step<TypedOntologyObject> {
         const $load = this.getDep(this.#loadStepId);
         assert(
             $load instanceof ObjectListStep,
-            `LoadedObjectStep could not find its associated ObjectListStep, instead found ${$load}.`
+            `LoadedObjectStep could not find its associated ObjectListStep, instead found ${$load.toString()}.`
         );
         $load.addProperties(this.#properties);
 
@@ -79,15 +68,13 @@ class ObjectListStep extends Step<ObjectListStepData> {
 
     #properties = new Set<PropertyApiName>();
 
-    #objectType: ObjectTypeV2;
     #contextStepId: number;
     #objectSetStepId: number;
     #argsStep: number;
 
-    constructor(objectType: ObjectTypeV2, $objectSet: Step<ObjectSet>, $args: Step<ObjectListArgs>) {
+    constructor($objectSet: Step<ObjectSet>, $args: Step<ObjectListArgs>) {
         super();
 
-        this.#objectType = objectType;
         this.#contextStepId = this.addUnaryDependency(context());
         this.#objectSetStepId = this.addDependency($objectSet);
         this.#argsStep = this.addDependency($args);
@@ -99,10 +86,11 @@ class ObjectListStep extends Step<ObjectListStepData> {
 
     execute({ values, indexMap }: ExecutionDetails): ExecutionResults<ObjectListStepData> {
         return indexMap(async (index) => {
+            /* eslint-disable @typescript-eslint/no-unsafe-assignment */
             const context: GoqlContext = values[this.#contextStepId]!.at(index);
             const objectSet: ObjectSet = values[this.#objectSetStepId]!.at(index);
             const { pageSize, pageToken, orderBy }: ObjectListArgs = values[this.#argsStep]!.at(index);
-
+            /* eslint-enable @typescript-eslint/no-unsafe-assignment */
             const { data, nextPageToken } = await OntologyObjectSets.load(
                 context.client,
                 context.ontologyRid,
@@ -133,7 +121,6 @@ class ObjectListStep extends Step<ObjectListStepData> {
 }
 
 export function objectListConnection(
-    objectType: ObjectTypeV2,
     $objectSet: Step<ObjectSet>,
     $args: Step<{
         first: Maybe<number>;
@@ -144,7 +131,6 @@ export function objectListConnection(
     }>
 ) {
     const objectListStep = new ObjectListStep(
-        objectType,
         $objectSet,
         lambda(
             $args,

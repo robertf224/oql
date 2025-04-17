@@ -6,7 +6,7 @@ import type {
 } from "@osdk/foundry.ontologies";
 import { assertNever } from "@valinor-enterprises/assertions";
 import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLOutputType, GraphQLString } from "graphql";
-import { LoadedRecordStep, objectFieldSpec, ObjectStep } from "grafast";
+import { LoadedRecordStep, objectFieldSpec } from "grafast";
 import { Result } from "@bobbyfidz/result";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { Schemas } from "../utils/Schemas.js";

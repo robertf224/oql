@@ -63,7 +63,7 @@ function create(
                 ObjectLinkField.create(typeName, getTypeReference, linkType, objectType.objectType, ontology)
             );
             const userLinkFields = Object.entries(objectType.objectType.properties)
-                .filter(([_, property]) => userProperties[property.rid])
+                .filter(([, property]) => userProperties[property.rid])
                 .map((property) => ObjectUserLinkField.create(typeName, getTypeReference, property));
             return Object.fromEntries([
                 [NodeInterface.FIELD_NAME, idField],

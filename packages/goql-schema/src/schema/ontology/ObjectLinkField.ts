@@ -1,5 +1,5 @@
 import type { LinkTypeSideV2, ObjectSet, ObjectTypeV2, OntologyFullMetadata } from "@osdk/foundry.ontologies";
-import { lambda, LoadedRecordStep, loadOne, objectFieldSpec, ObjectStep } from "grafast";
+import { lambda, LoadedRecordStep, loadOne, objectFieldSpec } from "grafast";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { ObjectSetType } from "./ObjectSetType.js";
 import { GetTypeReference } from "../utils/TypeRegistry.js";

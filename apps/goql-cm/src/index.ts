@@ -38,6 +38,7 @@ const getEnveloped = envelop({
 });
 
 computeModule.register("graphql", async ({ query, operationName, variables, token }) => {
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
     const { parse, validate, execute, schema } = getEnveloped();
 
     const document = parse(query);
@@ -58,6 +59,7 @@ computeModule.register("graphql", async ({ query, operationName, variables, toke
     });
 
     return JSON.stringify(result);
+    /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 });
 
 computeModule.on("responsive", () => {

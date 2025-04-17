@@ -10,7 +10,7 @@ const TYPE_NAME = "Node";
  * - we will generally avoid collisions with actual property API names.
  * - Relay can actually handle this now (https://github.com/facebook/relay/issues/3897).
  */
-const FIELD_NAME = "_id" as const;
+const FIELD_NAME = "_id";
 
 function create(): GraphQLInterfaceType {
     return new GraphQLInterfaceType({

@@ -33,4 +33,4 @@ export async function start() {
     server.listen(8080);
 }
 
-start();
+start().catch(console.error);

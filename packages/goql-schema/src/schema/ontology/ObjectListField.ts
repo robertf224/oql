@@ -1,4 +1,4 @@
-import { ObjectTypeV2, PropertyApiName } from "@osdk/foundry.ontologies";
+import { ObjectSet, ObjectTypeV2, PropertyApiName } from "@osdk/foundry.ontologies";
 import { Maybe, objectFieldSpec, Step } from "grafast";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { GetTypeReference } from "../utils/TypeRegistry.js";
@@ -12,7 +12,7 @@ function create(
     getTypeReference: GetTypeReference,
     objectType: ObjectTypeV2
 ): NamedGraphQLFieldConfig {
-    const field = objectFieldSpec(
+    const field = objectFieldSpec<Step<ObjectSet>, ReturnType<typeof objectListConnection>>(
         {
             description: `A list of ${objectType.pluralDisplayName}.`,
             // TODO: args
@@ -30,7 +30,6 @@ function create(
             type: ObjectListTypes.getPageTypeReference(getTypeReference, objectType),
             plan: ($objectSet, $args) =>
                 objectListConnection(
-                    objectType,
                     $objectSet,
                     $args.getRaw() as Step<{
                         first: Maybe<number>;

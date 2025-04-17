@@ -1,11 +1,11 @@
-import { constant, lambda, Step } from "grafast";
+import { lambda, Step } from "grafast";
 import { camelCase } from "change-case";
 import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { ObjectSet, ObjectTypeV2 } from "@osdk/foundry.ontologies";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { objectFieldSpec } from "grafast";
 import { ObjectSetType } from "./ObjectSetType.js";
-import { ObjectSetFilterType } from "./ObjectSetFilterType.js";
+import { ObjectSetFilter, ObjectSetFilterType } from "./ObjectSetFilterType.js";
 
 function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): NamedGraphQLFieldConfig {
     const fieldName = `${camelCase(objectType.apiName)}Search`;
@@ -24,7 +24,7 @@ function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): N
             plan: (_$query, $args) => {
                 return lambda(
                     $args.getRaw(),
-                    (args) => {
+                    (args: { where: ObjectSetFilter }) => {
                         let objectSet: ObjectSet = {
                             type: "base",
                             objectType: objectType.apiName,

@@ -1,7 +1,7 @@
-import { PrimaryKeyValue, OntologyObjectsV2, PropertyApiName, ObjectTypeV2 } from "@osdk/foundry.ontologies";
+import { OntologyObjectsV2, PropertyApiName, ObjectTypeV2 } from "@osdk/foundry.ontologies";
 import { LoadOneCallback, loadOneCallback } from "grafast";
 import { GoqlContext } from "../context.js";
-import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { PrimaryKeyValue, TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 
 type ObjectLoader = LoadOneCallback<PrimaryKeyValue, TypedOntologyObject, {}, GoqlContext>;
 

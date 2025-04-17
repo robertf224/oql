@@ -11,6 +11,7 @@ import { StringFilter, StringFilterType } from "../filters/StringFilterType.js";
 export interface ObjectSetFilter {
     [propertyApiName: string]: StringFilter;
 }
+
 function toObjectSetFilter(objectType: ObjectTypeV2, filter: ObjectSetFilter): SearchJsonQueryV2 | undefined {
     const key = Object.keys(filter)[0];
     if (!key) {
@@ -19,7 +20,7 @@ function toObjectSetFilter(objectType: ObjectTypeV2, filter: ObjectSetFilter): S
     const property = objectType.properties[key]!;
     switch (property.dataType.type) {
         case "string":
-            return StringFilterType.toObjectSetFilter(key, filter[key]! as StringFilter);
+            return StringFilterType.toObjectSetFilter(key, filter[key]!);
         default:
             return undefined;
     }
@@ -52,12 +53,12 @@ function create(typeRegistry: TypeRegistry, objectType: ObjectTypeFullMetadata):
                     .map(([propertyApiName, property]) => {
                         const filterType = getFilterType(getTypeReference, property);
                         return filterType
-                            ? [
+                            ? ([
                                   propertyApiName,
                                   {
                                       type: filterType,
-                                  } satisfies GraphQLInputFieldConfig,
-                              ]
+                                  },
+                              ] satisfies [string, GraphQLInputFieldConfig])
                             : undefined;
                     })
                     .filter((propertyFilterField) => propertyFilterField !== undefined),

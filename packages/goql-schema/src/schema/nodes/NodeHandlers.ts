@@ -7,7 +7,7 @@ import { context, GoqlContext } from "../context.js";
 const BASIC_CODEC: NodeIdCodec = {
     name: "basic-codec",
     encode: (id) => Base64.encode(JSON.stringify(id)),
-    decode: (id) => JSON.parse(Result.unwrap(Base64.decode(id))),
+    decode: (id) => JSON.parse(Result.unwrap(Base64.decode(id))) as [string, string],
 };
 
 function createBasicHandler(

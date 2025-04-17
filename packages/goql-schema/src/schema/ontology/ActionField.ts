@@ -53,9 +53,10 @@ function getArgumentType(
             return Result.err(new Error("Vector type not supported."));
         case "objectType":
             return Result.err(new Error("ObjectType type not supported."));
-        case "object":
+        case "object": {
             const objectType = ontology.objectTypes[type.objectTypeApiName]!.objectType;
             return Result.ok(ObjectArgumentType.get(objectType));
+        }
         case "interfaceObject":
             return Result.err(new Error("InterfaceObject type not supported."));
         case "objectSet":
