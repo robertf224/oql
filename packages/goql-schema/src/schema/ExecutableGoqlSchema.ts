@@ -10,8 +10,8 @@ import { getUserIdFromToken } from "./utils/getUserIdFromToken.js";
 
 async function create(
     client: Client,
-    createRequestClient: () => Client
-): Promise<{ schema: GraphQLSchema; context: () => Promise<GoqlContext> }> {
+    createRequestClient: (token: string) => Client
+): Promise<{ schema: GraphQLSchema; context: (token: string) => Promise<GoqlContext> }> {
     const ontologyRid = (client.__osdkClientContext as unknown as { ontologyRid: string }).ontologyRid;
     const ontology = await OntologiesV2.getFullMetadata(client, ontologyRid);
     const ontologyMetadataService = getConjureClient(
@@ -34,8 +34,8 @@ async function create(
         privateApiObjectTypes.map((o) => o?.objectType).filter((o) => o !== undefined)
     );
     const schema = GoqlSchema.create(ontology, userProperties);
-    const context = async (): Promise<GoqlContext> => {
-        const requestClient = createRequestClient();
+    const context = async (token: string): Promise<GoqlContext> => {
+        const requestClient = createRequestClient(token);
         const userId = getUserIdFromToken(await requestClient.__osdkClientContext.tokenProvider());
         return {
             client: requestClient,
