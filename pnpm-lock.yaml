@@ -131,8 +131,8 @@ importers:
         specifier: file:../../bobbyfidz-private-oms-api-0.0.0.tgz
         version: file:bobbyfidz-private-oms-api-0.0.0.tgz
       '@bobbyfidz/result':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.3.0
+        version: 0.3.0
       '@osdk/client':
         specifier: ^2.1.2
         version: 2.1.3
@@ -217,11 +217,11 @@ packages:
     resolution: {integrity: sha512-IRJa1L52yjmYj+BACoe8dwoBdJHDzapzCs795UKH9NjwycFHArHWwjmRNE1olMYJf8f6gL0+rG1sslhcyt1vHA==, tarball: file:bobbyfidz-private-oms-api-0.0.0.tgz}
     version: 0.0.0
 
-  '@bobbyfidz/result@0.1.0':
-    resolution: {integrity: sha512-fFSVB4R6H7NGZLmhklHBOavMM1UElgRaTiyPWPVivYBjnIWsqrChwwfyRELgvp8OZlbHm2t4vCiz5lVey3Vd0Q==}
-
   '@bobbyfidz/result@0.2.0':
     resolution: {integrity: sha512-rmbuWcSK9bbJzuRW/oyoulGyc7QzOqkF8/CAtqBVYggYXBdmgRNG+ZkSg+fw5drQgncLC9FbfF0nLMelj40UFQ==}
+
+  '@bobbyfidz/result@0.3.0':
+    resolution: {integrity: sha512-5JZXJu/EBk50s9z6pEwnp0JXcEixjsr5hjxI+cyCxue+Hlquh+x2AU01PnjNzNb7nqcRNkFpduqZLQxO/xbWCg==}
 
   '@bobbyfidz/universal-build-config@0.1.0':
     resolution: {integrity: sha512-DIT6cQQ2+MAmRNgPJZQkzNfRVM6fnuc4nXmdbodlQCUw2KiF2u7qJmYWIl1dCGhylBXdA12pGm1YjOaYkebF0w==}
@@ -2060,9 +2060,9 @@ snapshots:
     dependencies:
       conjure-client: 2.14.0
 
-  '@bobbyfidz/result@0.1.0': {}
-
   '@bobbyfidz/result@0.2.0': {}
+
+  '@bobbyfidz/result@0.3.0': {}
 
   '@bobbyfidz/universal-build-config@0.1.0(eslint@9.24.0)(typescript@5.8.3)':
     dependencies:
