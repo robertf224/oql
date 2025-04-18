@@ -2,8 +2,8 @@
     "name": "@bobbyfidz/oql-monorepo",
     "private": true,
     "scripts": {
-        "lint-versions": "syncpack list-mismatches",
-        "prepare": "husky"
+        "lint-versions": "syncpack lint",
+        "upgrade-versions": "syncpack update && syncpack set-semver-ranges && syncpack fix-mismatches"
     },
     "devDependencies": {
         "@changesets/cli": "^2.28.1",

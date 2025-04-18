@@ -79,7 +79,7 @@ function create(
             getArgumentType(parameter.dataType, ontology),
         ])
     );
-    const invalidArgTypes = Object.entries(argTypeResults).filter(([, result]) => Result.isError(result));
+    const invalidArgTypes = Object.entries(argTypeResults).filter(([, result]) => Result.isErr(result));
     if (invalidArgTypes.length > 0) {
         return Result.err(
             new Error(
