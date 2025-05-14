@@ -1,13 +1,13 @@
-import { access, each, ExecutionDetails, ExecutionResults, lambda, object, Step, Maybe } from "grafast";
+import { invariant } from "@bobbyfidz/panic";
 import {
     ObjectSet,
     OntologyObjectSets,
     PropertyApiName,
     SelectedPropertyApiName,
 } from "@osdk/foundry.ontologies";
-import { assert } from "@valinor-enterprises/assertions";
-import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { access, each, ExecutionDetails, ExecutionResults, lambda, object, Step, Maybe } from "grafast";
 import { GoqlContext, context } from "../context.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 
 export interface ObjectListStepData {
     data: TypedOntologyObject[];
@@ -49,7 +49,7 @@ export class LoadedObjectStep extends Step<TypedOntologyObject> {
 
     optimize() {
         const $load = this.getDep(this.#loadStepId);
-        assert(
+        invariant(
             $load instanceof ObjectListStep,
             `LoadedObjectStep could not find its associated ObjectListStep, instead found ${$load.toString()}.`
         );

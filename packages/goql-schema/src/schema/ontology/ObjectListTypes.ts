@@ -1,8 +1,8 @@
 import { ObjectTypeV2 } from "@osdk/foundry.ontologies";
 import { GraphQLObjectType, GraphQLEnumType, GraphQLEnumValueConfig, GraphQLInputObjectType } from "graphql";
-import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
 import { ListTypes } from "../ListTypes.js";
 import { Schemas } from "../utils/Schemas.js";
+import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
 
 function createPageType(typeRegistry: TypeRegistry, objectType: ObjectTypeV2): GraphQLObjectType {
     return ListTypes.createPageType(typeRegistry, objectType.apiName, objectType.pluralDisplayName);

@@ -1,3 +1,7 @@
+import { Result } from "@bobbyfidz/result";
+import { ActionParameterType, Actions, ActionTypeV2, OntologyFullMetadata } from "@osdk/foundry.ontologies";
+import { camelCase } from "change-case";
+import { objectFieldSpec, sideEffect, Step } from "grafast";
 import {
     GraphQLArgumentConfig,
     GraphQLBoolean,
@@ -6,15 +10,11 @@ import {
     GraphQLInt,
     GraphQLString,
 } from "graphql";
-import { objectFieldSpec, sideEffect, Step } from "grafast";
-import { ActionParameterType, Actions, ActionTypeV2, OntologyFullMetadata } from "@osdk/foundry.ontologies";
-import { Result } from "@bobbyfidz/result";
-import { camelCase } from "change-case";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
+import { context } from "../context.js";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { Schemas } from "../utils/Schemas.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { ObjectArgumentType } from "./ObjectArgumentType.js";
-import { context } from "../context.js";
 
 function getArgumentType(
     type: ActionParameterType,

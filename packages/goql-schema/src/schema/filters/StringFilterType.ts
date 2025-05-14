@@ -1,7 +1,6 @@
 import { PropertyApiName, SearchJsonQueryV2 } from "@osdk/foundry.ontologies";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { GraphQLInputObjectType, GraphQLString } from "graphql";
-import { assertNever } from "@valinor-enterprises/assertions";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
 
 const TYPE_NAME = "StringFilter";
 
@@ -9,7 +8,7 @@ export interface StringFilter {
     eq?: string;
     contains?: string;
 }
-function toObjectSetFilter(field: PropertyApiName, filter: StringFilter): SearchJsonQueryV2 {
+function toObjectSetFilter(field: PropertyApiName, filter: StringFilter): SearchJsonQueryV2 | undefined {
     if (filter.eq) {
         return {
             type: "eq",
@@ -23,7 +22,7 @@ function toObjectSetFilter(field: PropertyApiName, filter: StringFilter): Search
             value: filter.contains,
         };
     } else {
-        assertNever(filter as never);
+        return undefined;
     }
 }
 

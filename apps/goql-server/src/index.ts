@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
-import { grafserv } from "grafserv/node";
 import { ExecutableGoqlSchema } from "@bobbyfidz/goql-schema";
+import { grafserv } from "grafserv/node";
 import { getFoundryClient } from "./getFoundryClient.js";
 
 // TODO: switch to Hono when integration is available

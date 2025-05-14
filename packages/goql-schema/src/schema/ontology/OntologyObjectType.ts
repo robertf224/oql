@@ -1,23 +1,23 @@
+import { Result } from "@bobbyfidz/result";
+import { LoadedRecordStep, nodeIdFromNode, NodeIdHandler, objectFieldSpec } from "grafast";
+import { GraphQLID, GraphQLObjectType } from "graphql";
+import { NodeHandlers } from "../nodes/NodeHandlers.js";
+import { NodeInterface } from "../nodes/NodeInterface.js";
+import { UserProperties } from "../utils/getUserProperties.js";
+import { Schemas } from "../utils/Schemas.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
+import { getObjectLoader } from "./getObjectLoader.js";
+import { ObjectLinkField } from "./ObjectLinkField.js";
+import { LoadedObjectStep } from "./ObjectListStep.js";
+import { ObjectPropertyField } from "./ObjectPropertyField.js";
+import { ObjectUserLinkField } from "./ObjectUserLinkField.js";
 import type {
     ObjectTypeApiName,
     ObjectTypeFullMetadata,
     ObjectTypeV2,
     OntologyFullMetadata,
 } from "@osdk/foundry.ontologies";
-import { Result } from "@bobbyfidz/result";
-import { GraphQLID, GraphQLObjectType } from "graphql";
-import { ObjectPropertyField } from "./ObjectPropertyField.js";
-import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
-import { ObjectLinkField } from "./ObjectLinkField.js";
-import { UserProperties } from "../utils/getUserProperties.js";
-import { ObjectUserLinkField } from "./ObjectUserLinkField.js";
-import { NodeInterface } from "../nodes/NodeInterface.js";
-import { Schemas } from "../utils/Schemas.js";
-import { LoadedRecordStep, nodeIdFromNode, NodeIdHandler, objectFieldSpec } from "grafast";
-import { LoadedObjectStep } from "./ObjectListStep.js";
-import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
-import { getObjectLoader } from "./getObjectLoader.js";
-import { NodeHandlers } from "../nodes/NodeHandlers.js";
 
 const nodeIdHandlerCache = new WeakMap<ObjectTypeV2, NodeIdHandler>();
 function getNodeIdHandler(objectType: ObjectTypeV2): NodeIdHandler {

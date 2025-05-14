@@ -1,4 +1,4 @@
-import { assert } from "@valinor-enterprises/assertions";
+import { invariant } from "@bobbyfidz/panic";
 import type {
     GraphQLFieldConfig,
     GraphQLInputFieldConfig,
@@ -25,7 +25,7 @@ export class TypeRegistry {
 
     #get: GetTypeReference = (name) => {
         const type = this.#types.get(name);
-        assert(type, `Type ${name} not found.`);
+        invariant(type, `Type ${name} not found.`);
         return type;
     };
 }

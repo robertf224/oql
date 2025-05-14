@@ -1,17 +1,17 @@
+import { unreachable } from "@bobbyfidz/panic";
+import { Result } from "@bobbyfidz/result";
+import { LoadedRecordStep, objectFieldSpec } from "grafast";
+import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLOutputType, GraphQLString } from "graphql";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
+import { Schemas } from "../utils/Schemas.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { LoadedObjectStep } from "./ObjectListStep.js";
 import type {
     ObjectPropertyType,
     PropertyApiName,
     PropertyTypeStatus,
     PropertyV2,
 } from "@osdk/foundry.ontologies";
-import { assertNever } from "@valinor-enterprises/assertions";
-import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLOutputType, GraphQLString } from "graphql";
-import { LoadedRecordStep, objectFieldSpec } from "grafast";
-import { Result } from "@bobbyfidz/result";
-import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
-import { Schemas } from "../utils/Schemas.js";
-import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
-import { LoadedObjectStep } from "./ObjectListStep.js";
 
 function getFieldType(type: ObjectPropertyType): Result<GraphQLOutputType> {
     // TODO: wrap w/ required when property is required
@@ -62,7 +62,7 @@ function getFieldType(type: ObjectPropertyType): Result<GraphQLOutputType> {
         case "vector":
             return Result.err(new Error("Vector type not supported."));
         default:
-            assertNever(type, "Unknown property type.");
+            unreachable(type);
     }
 }
 

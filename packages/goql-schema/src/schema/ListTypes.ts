@@ -1,6 +1,6 @@
 import { GraphQLBoolean, GraphQLFieldConfig, GraphQLObjectType, GraphQLString } from "graphql";
-import { GetTypeReference, TypeRegistry } from "./utils/TypeRegistry.js";
 import { Schemas } from "./utils/Schemas.js";
+import { GetTypeReference, TypeRegistry } from "./utils/TypeRegistry.js";
 
 export interface PageInfo {
     hasNextPage: boolean;

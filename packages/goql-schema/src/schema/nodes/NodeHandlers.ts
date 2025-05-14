@@ -1,7 +1,7 @@
-import { constant, list, loadOne } from "grafast";
-import { NodeIdCodec, NodeIdHandler, LoadOneCallback, LoadedRecordStep, ListStep, Step } from "grafast";
 import { Base64 } from "@bobbyfidz/base64";
 import { Result } from "@bobbyfidz/result";
+import { constant, list, loadOne } from "grafast";
+import { NodeIdCodec, NodeIdHandler, LoadOneCallback, LoadedRecordStep, ListStep, Step } from "grafast";
 import { context, GoqlContext } from "../context.js";
 
 const BASIC_CODEC: NodeIdCodec = {

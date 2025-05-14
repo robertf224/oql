@@ -1,12 +1,12 @@
-import type { PropertyApiName, PropertyV2 } from "@osdk/foundry.ontologies";
 import { LoadedRecordStep, loadOne, objectFieldSpec } from "grafast";
-import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { GraphQLObjectType } from "graphql";
-import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
-import { context } from "../context.js";
-import { LoadedObjectStep } from "./ObjectListStep.js";
 import { UserLoader } from "../admin/UserLoader.js";
+import { context } from "../context.js";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
+import { LoadedObjectStep } from "./ObjectListStep.js";
+import type { PropertyApiName, PropertyV2 } from "@osdk/foundry.ontologies";
 
 function create(
     path: string,

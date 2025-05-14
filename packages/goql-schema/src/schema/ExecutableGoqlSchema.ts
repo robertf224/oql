@@ -1,12 +1,12 @@
+import oms from "@bobbyfidz/private-oms-api";
 import { Client } from "@osdk/client";
 import { OntologiesV2 } from "@osdk/foundry.ontologies";
-import oms from "@bobbyfidz/private-oms-api";
 import { GraphQLSchema } from "graphql";
 import { GoqlContext } from "./context.js";
-import { getUserProperties } from "./utils/getUserProperties.js";
 import { GoqlSchema } from "./GoqlSchema.js";
 import { getConjureClient } from "./utils/getConjureClient.js";
 import { getUserIdFromToken } from "./utils/getUserIdFromToken.js";
+import { getUserProperties } from "./utils/getUserProperties.js";
 
 async function create(
     client: Client,

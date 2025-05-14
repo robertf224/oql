@@ -8,13 +8,13 @@ import {
     ObjectTypeFields,
 } from "grafast";
 import { GraphQLID, GraphQLObjectType, GraphQLString } from "graphql";
-import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
-import { Schemas } from "../utils/Schemas.js";
-import { NodeInterface } from "../nodes/NodeInterface.js";
-import { UserLoader } from "./UserLoader.js";
 import { context } from "../context.js";
-import { UserProfilePictureLoader } from "./UserProfilePictureLoader.js";
 import { NodeHandlers } from "../nodes/NodeHandlers.js";
+import { NodeInterface } from "../nodes/NodeInterface.js";
+import { Schemas } from "../utils/Schemas.js";
+import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
+import { UserLoader } from "./UserLoader.js";
+import { UserProfilePictureLoader } from "./UserProfilePictureLoader.js";
 
 const TYPE_NAME = "User";
 

@@ -1,6 +1,6 @@
 import { GraphQLID, GraphQLInterfaceType } from "graphql";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { Schemas } from "../utils/Schemas.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
 
 const TYPE_NAME = "Node";
 

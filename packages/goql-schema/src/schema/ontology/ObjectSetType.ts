@@ -1,8 +1,8 @@
-import type { ObjectTypeApiName, ObjectTypeFullMetadata, ObjectTypeV2 } from "@osdk/foundry.ontologies";
 import { GraphQLObjectType } from "graphql";
 import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
 import { ObjectListField } from "./ObjectListField.js";
 import { ObjectSetLinkField } from "./ObjectSetLinkField.js";
+import type { ObjectTypeApiName, ObjectTypeFullMetadata, ObjectTypeV2 } from "@osdk/foundry.ontologies";
 
 function create(typeRegistry: TypeRegistry, objectType: ObjectTypeFullMetadata): GraphQLObjectType {
     const typeName = getName(objectType.objectType);
