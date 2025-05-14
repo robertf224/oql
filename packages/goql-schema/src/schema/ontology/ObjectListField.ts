@@ -1,11 +1,11 @@
 import { ObjectSet, ObjectTypeV2, PropertyApiName } from "@osdk/foundry.ontologies";
 import { Maybe, objectFieldSpec, Step } from "grafast";
-import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
-import { ObjectListTypes } from "./ObjectListTypes.js";
-import { objectListConnection } from "./ObjectListStep.js";
 import { GraphQLString } from "graphql";
 import { GraphQLInt } from "graphql";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
+import { objectListConnection } from "./ObjectListStep.js";
+import { ObjectListTypes } from "./ObjectListTypes.js";
 
 function create(
     path: string,

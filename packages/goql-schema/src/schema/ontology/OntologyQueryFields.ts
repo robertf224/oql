@@ -1,8 +1,8 @@
-import type { OntologyFullMetadata } from "@osdk/foundry.ontologies";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
 import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { ObjectQueryField } from "./ObjectQueryField.js";
 import { ObjectSearchQueryField } from "./ObjectSearchQueryField.js";
+import type { OntologyFullMetadata } from "@osdk/foundry.ontologies";
 
 function create(
     getTypeReference: GetTypeReference,

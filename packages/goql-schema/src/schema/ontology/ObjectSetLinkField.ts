@@ -1,8 +1,8 @@
-import type { LinkTypeSideV2, ObjectSet } from "@osdk/foundry.ontologies";
 import { lambda, objectFieldSpec, Step } from "grafast";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
-import { ObjectSetType } from "./ObjectSetType.js";
 import { GetTypeReference } from "../utils/TypeRegistry.js";
+import { ObjectSetType } from "./ObjectSetType.js";
+import type { LinkTypeSideV2, ObjectSet } from "@osdk/foundry.ontologies";
 
 function create(
     path: string,

@@ -1,11 +1,11 @@
-import { lambda, Step } from "grafast";
-import { camelCase } from "change-case";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { ObjectSet, ObjectTypeV2 } from "@osdk/foundry.ontologies";
-import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
+import { camelCase } from "change-case";
+import { lambda, Step } from "grafast";
 import { objectFieldSpec } from "grafast";
-import { ObjectSetType } from "./ObjectSetType.js";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { ObjectSetFilter, ObjectSetFilterType } from "./ObjectSetFilterType.js";
+import { ObjectSetType } from "./ObjectSetType.js";
 
 function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): NamedGraphQLFieldConfig {
     const fieldName = `${camelCase(objectType.apiName)}Search`;

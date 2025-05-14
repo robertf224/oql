@@ -1,15 +1,15 @@
-import type { LinkTypeSideV2, ObjectSet, ObjectTypeV2, OntologyFullMetadata } from "@osdk/foundry.ontologies";
+import { unreachable } from "@bobbyfidz/panic";
 import { lambda, LoadedRecordStep, loadOne, objectFieldSpec } from "grafast";
-import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
-import { ObjectSetType } from "./ObjectSetType.js";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
-import { OntologyObjectType } from "./OntologyObjectType.js";
-import { assertNever } from "@valinor-enterprises/assertions";
 import { GraphQLFieldConfig } from "graphql";
-import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 import { context } from "../context.js";
-import { LoadedObjectStep } from "./ObjectListStep.js";
+import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { getObjectLoader } from "./getObjectLoader.js";
+import { LoadedObjectStep } from "./ObjectListStep.js";
+import { ObjectSetType } from "./ObjectSetType.js";
+import { OntologyObjectType } from "./OntologyObjectType.js";
+import type { LinkTypeSideV2, ObjectSet, ObjectTypeV2, OntologyFullMetadata } from "@osdk/foundry.ontologies";
 
 function create(
     path: string,
@@ -69,7 +69,7 @@ function create(
             fullPath
         );
     } else {
-        assertNever(linkType.cardinality, "Unknown link cardinality.");
+        unreachable(linkType.cardinality);
     }
 
     return [linkType.apiName, field];

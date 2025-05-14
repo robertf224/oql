@@ -1,9 +1,9 @@
 import { node, Step, objectFieldSpec, NodeIdHandler } from "grafast";
 import { GraphQLID } from "graphql";
-import { NodeInterface } from "./NodeInterface.js";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { Schemas } from "../utils/Schemas.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
+import { NodeInterface } from "./NodeInterface.js";
 
 function create(getTypeReference: GetTypeReference, handlers: NodeIdHandler[]): NamedGraphQLFieldConfig {
     const handlersMap = Object.fromEntries(handlers.map((handler) => [handler.typeName, handler]));

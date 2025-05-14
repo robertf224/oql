@@ -1,6 +1,6 @@
-import type { Client } from "@osdk/client";
 import { OntologyIdentifier } from "@osdk/foundry.ontologies";
 import { context as baseContext } from "grafast";
+import type { Client } from "@osdk/client";
 
 export interface GoqlContext {
     client: Client;

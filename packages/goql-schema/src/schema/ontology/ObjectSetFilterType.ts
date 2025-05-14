@@ -1,12 +1,12 @@
+import { GraphQLInputFieldConfig, GraphQLInputObjectType } from "graphql";
+import { StringFilter, StringFilterType } from "../filters/StringFilterType.js";
+import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
 import type {
     ObjectTypeFullMetadata,
     ObjectTypeV2,
     PropertyV2,
     SearchJsonQueryV2,
 } from "@osdk/foundry.ontologies";
-import { GraphQLInputFieldConfig, GraphQLInputObjectType } from "graphql";
-import { GetTypeReference, TypeRegistry } from "../utils/TypeRegistry.js";
-import { StringFilter, StringFilterType } from "../filters/StringFilterType.js";
 
 export interface ObjectSetFilter {
     [propertyApiName: string]: StringFilter;

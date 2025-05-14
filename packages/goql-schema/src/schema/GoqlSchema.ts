@@ -1,21 +1,21 @@
+import { Result } from "@bobbyfidz/result";
 import { GraphQLObjectType } from "graphql";
 import { GraphQLSchema } from "graphql";
-import type { OntologyFullMetadata } from "@osdk/foundry.ontologies";
-import { Result } from "@bobbyfidz/result";
-import { OntologyQueryFields } from "./ontology/OntologyQueryFields.js";
-import { TypeRegistry } from "./utils/TypeRegistry.js";
-import { OntologyObjectType } from "./ontology/OntologyObjectType.js";
-import { ObjectSetType } from "./ontology/ObjectSetType.js";
-import { ListTypes } from "./ListTypes.js";
-import { ObjectListTypes } from "./ontology/ObjectListTypes.js";
-import { UserType } from "./admin/UserType.js";
 import { UserQueryFields } from "./admin/UserQueryFields.js";
-import { UserProperties } from "./utils/getUserProperties.js";
-import { NodeInterface } from "./nodes/NodeInterface.js";
-import { NodeField } from "./nodes/NodeField.js";
-import { ActionField } from "./ontology/ActionField.js";
-import { ObjectSetFilterType } from "./ontology/ObjectSetFilterType.js";
+import { UserType } from "./admin/UserType.js";
 import { StringFilterType } from "./filters/StringFilterType.js";
+import { ListTypes } from "./ListTypes.js";
+import { NodeField } from "./nodes/NodeField.js";
+import { NodeInterface } from "./nodes/NodeInterface.js";
+import { ActionField } from "./ontology/ActionField.js";
+import { ObjectListTypes } from "./ontology/ObjectListTypes.js";
+import { ObjectSetFilterType } from "./ontology/ObjectSetFilterType.js";
+import { ObjectSetType } from "./ontology/ObjectSetType.js";
+import { OntologyObjectType } from "./ontology/OntologyObjectType.js";
+import { OntologyQueryFields } from "./ontology/OntologyQueryFields.js";
+import { UserProperties } from "./utils/getUserProperties.js";
+import { TypeRegistry } from "./utils/TypeRegistry.js";
+import type { OntologyFullMetadata } from "@osdk/foundry.ontologies";
 
 function create(ontology: OntologyFullMetadata, userProperties: UserProperties = {}): GraphQLSchema {
     const typeRegistry = new TypeRegistry();

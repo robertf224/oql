@@ -1,14 +1,14 @@
 import { ObjectTypeV2 } from "@osdk/foundry.ontologies";
-import { LoadedRecordStep, loadOne, objectFieldSpec, Step } from "grafast";
 import { camelCase } from "change-case";
-import { GetTypeReference } from "../utils/TypeRegistry.js";
-import { ObjectArgumentType } from "./ObjectArgumentType.js";
+import { LoadedRecordStep, loadOne, objectFieldSpec, Step } from "grafast";
 import { context } from "../context.js";
 import { NamedGraphQLFieldConfig } from "../utils/NamedGraphQLFieldConfig.js";
-import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
-import { OntologyObjectType } from "./OntologyObjectType.js";
-import { getObjectLoader } from "./getObjectLoader.js";
 import { Schemas } from "../utils/Schemas.js";
+import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
+import { GetTypeReference } from "../utils/TypeRegistry.js";
+import { getObjectLoader } from "./getObjectLoader.js";
+import { ObjectArgumentType } from "./ObjectArgumentType.js";
+import { OntologyObjectType } from "./OntologyObjectType.js";
 
 function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): NamedGraphQLFieldConfig {
     const fieldName = camelCase(objectType.apiName);
