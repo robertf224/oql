@@ -1,5 +1,11 @@
 # @bobbyfidz/goql-schema
 
+## 0.2.3
+
+### Patch Changes
+
+- 0b38bfb: fix base64 decoding
+
 ## 0.2.2
 
 ### Patch Changes
