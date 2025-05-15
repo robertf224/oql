@@ -180,12 +180,12 @@ importers:
       '@bobbyfidz/base64':
         specifier: ^0.1.1
         version: 0.1.1
+      '@bobbyfidz/oms':
+        specifier: ^0.0.0
+        version: 0.0.0
       '@bobbyfidz/panic':
         specifier: ^0.1.0
         version: 0.1.0
-      '@bobbyfidz/private-oms-api':
-        specifier: file:./assets/bobbyfidz-private-oms-api-0.0.0.tgz
-        version: file:packages/goql-schema/assets/bobbyfidz-private-oms-api-0.0.0.tgz
       '@bobbyfidz/result':
         specifier: ^0.3.0
         version: 0.3.0
@@ -278,12 +278,11 @@ packages:
   '@bobbyfidz/local-oauth-flow@0.1.0':
     resolution: {integrity: sha512-LG8vKgA33XtLkRQkKatuYbaq2eC4MQqQsQ0+R1SVL1kiJs+M8zN9hrnVAiDdfwfeHmJsuMs6H2jbvWdIYfjs2A==}
 
+  '@bobbyfidz/oms@0.0.0':
+    resolution: {integrity: sha512-dVcrQY4ThtUi9jldtmiaE1/EyLc1f+70KfaUTrRP7iiau3N4hz+HABmrOba4DPLaeAKquwseM7DJrd4vsu7HTw==}
+
   '@bobbyfidz/panic@0.1.0':
     resolution: {integrity: sha512-RBsePvsVvd8LCZfyuIpH/2BCpxfjwBtlaVB4gXIZ/A19Z7kbscpTZrAEhfpSfcXCamzgU1vZtqjRj9v8ZjMIng==}
-
-  '@bobbyfidz/private-oms-api@file:packages/goql-schema/assets/bobbyfidz-private-oms-api-0.0.0.tgz':
-    resolution: {integrity: sha512-IRJa1L52yjmYj+BACoe8dwoBdJHDzapzCs795UKH9NjwycFHArHWwjmRNE1olMYJf8f6gL0+rG1sslhcyt1vHA==, tarball: file:packages/goql-schema/assets/bobbyfidz-private-oms-api-0.0.0.tgz}
-    version: 0.0.0
 
   '@bobbyfidz/result@0.2.0':
     resolution: {integrity: sha512-rmbuWcSK9bbJzuRW/oyoulGyc7QzOqkF8/CAtqBVYggYXBdmgRNG+ZkSg+fw5drQgncLC9FbfF0nLMelj40UFQ==}
@@ -2771,11 +2770,11 @@ snapshots:
       oauth4webapi: 3.5.1
       open: 10.1.2
 
-  '@bobbyfidz/panic@0.1.0': {}
-
-  '@bobbyfidz/private-oms-api@file:packages/goql-schema/assets/bobbyfidz-private-oms-api-0.0.0.tgz':
+  '@bobbyfidz/oms@0.0.0':
     dependencies:
       conjure-client: 2.14.0
+
+  '@bobbyfidz/panic@0.1.0': {}
 
   '@bobbyfidz/result@0.2.0': {}
 

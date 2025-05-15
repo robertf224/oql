@@ -1,4 +1,4 @@
-import oms from "@bobbyfidz/private-oms-api";
+import oms from "@bobbyfidz/oms";
 import { envelop, useSchema, useEngine } from "@envelop/core";
 import { useParserCache } from "@envelop/parser-cache";
 import { useValidationCache } from "@envelop/validation-cache";
