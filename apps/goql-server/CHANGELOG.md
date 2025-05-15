@@ -1,5 +1,12 @@
 # @bobbyfidz/goql-server
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [275eb84]
+    - @bobbyfidz/goql-schema@0.2.4
+
 ## 0.0.5
 
 ### Patch Changes
