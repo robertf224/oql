@@ -1,5 +1,11 @@
 # @bobbyfidz/goql-schema
 
+## 0.2.2
+
+### Patch Changes
+
+- ba51752: fix publish
+
 ## 0.2.1
 
 ### Patch Changes
