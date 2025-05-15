@@ -1,0 +1,38 @@
+{
+    "name": "@bobbyfidz/goql-cli",
+    "version": "0.0.0",
+    "type": "module",
+    "bin": {
+        "goql": "./bin/run.js"
+    },
+    "files": [
+        "lib",
+        "bin"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "lint": "eslint"
+    },
+    "oclif": {
+        "bin": "goql",
+        "commands": "./lib/commands",
+        "dirname": "goql",
+        "topicSeparator": " "
+    },
+    "dependencies": {
+        "@bobbyfidz/goql-schema": "workspace:*",
+        "@bobbyfidz/local-oauth-flow": "^0.1.0",
+        "@bobbyfidz/panic": "^0.1.0",
+        "@next/env": "^15.3.2",
+        "@oclif/core": "^4.0.22",
+        "@osdk/client": "^2.1.2",
+        "graphql": "^16.10.0",
+        "ts-node": "^10.9.2"
+    },
+    "devDependencies": {
+        "@bobbyfidz/universal-build-config": "^0.1.1",
+        "@types/node": "^20.17.30",
+        "eslint": "^9.21.0",
+        "typescript": "~5.8.2"
+    }
+}

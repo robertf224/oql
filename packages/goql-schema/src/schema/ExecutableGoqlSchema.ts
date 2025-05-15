@@ -20,7 +20,7 @@ export interface ExecutableGoqlSchema {
 
 async function create(
     client: Client,
-    createRequestClient: (token: string) => Client
+    createRequestClient?: (token: string) => Client
 ): Promise<ExecutableGoqlSchema> {
     const ontologyRid = (client.__osdkClientContext as unknown as { ontologyRid: string }).ontologyRid;
     const ontology = await OntologiesV2.getFullMetadata(client, ontologyRid);
@@ -45,7 +45,7 @@ async function create(
     );
     const schema = GoqlSchema.create(ontology, userProperties);
     const context = async (token: string): Promise<GoqlContext> => {
-        const requestClient = createRequestClient(token);
+        const requestClient = createRequestClient?.(token) ?? client;
         const userId = getUserIdFromToken(await requestClient.__osdkClientContext.tokenProvider());
         return {
             client: requestClient,
