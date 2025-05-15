@@ -1,4 +1,4 @@
-import oms from "@bobbyfidz/oms";
+import { ontologyMetadataApi } from "@bobbyfidz/oms";
 import { envelop, useSchema, useEngine } from "@envelop/core";
 import { useParserCache } from "@envelop/parser-cache";
 import { useValidationCache } from "@envelop/validation-cache";
@@ -26,7 +26,7 @@ async function create(
     const ontology = await OntologiesV2.getFullMetadata(client, ontologyRid);
     const ontologyMetadataService = getConjureClient(
         client,
-        oms.ontologyMetadataApi.OntologyMetadataService,
+        ontologyMetadataApi.OntologyMetadataService,
         "/ontology-metadata/api"
     );
     const { objectTypes: privateApiObjectTypes } = await ontologyMetadataService.bulkLoadOntologyEntities({

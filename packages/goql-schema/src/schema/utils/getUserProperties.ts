@@ -1,4 +1,4 @@
-import oms from "@bobbyfidz/oms";
+import { ontologyMetadataApi } from "@bobbyfidz/oms";
 import { PropertyApiName, PropertyTypeRid } from "@osdk/foundry.ontologies";
 import { ObjectTypeApiName } from "@osdk/foundry.ontologies";
 
@@ -7,9 +7,7 @@ export type UserProperties = Record<
     { objectTypeApiName: ObjectTypeApiName; propertyApiName: PropertyApiName }
 >;
 
-export function getUserProperties(
-    privateApiObjectTypes: oms.ontologyMetadataApi.IObjectType[]
-): UserProperties {
+export function getUserProperties(privateApiObjectTypes: ontologyMetadataApi.IObjectType[]): UserProperties {
     return Object.fromEntries(
         privateApiObjectTypes.flatMap((objectType) =>
             Object.values(objectType.propertyTypes)
