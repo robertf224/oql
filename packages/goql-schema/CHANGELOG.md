@@ -1,5 +1,11 @@
 # @bobbyfidz/goql-schema
 
+## 0.2.4
+
+### Patch Changes
+
+- 275eb84: fix imports
+
 ## 0.2.3
 
 ### Patch Changes
