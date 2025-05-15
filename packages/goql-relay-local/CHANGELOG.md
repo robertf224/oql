@@ -1,4 +1,4 @@
-# @bobbyfidz/goql-cm
+# @bobbyfidz/goql-relay-local
 
 ## 0.1.0
 
@@ -10,10 +10,3 @@
 
 - Updated dependencies [1dee66e]
     - @bobbyfidz/goql-schema@0.2.0
-
-## 0.0.1
-
-### Patch Changes
-
-- Updated dependencies [cbab23d]
-    - @bobbyfidz/goql-schema@0.1.0
