@@ -13,7 +13,6 @@
         "lint": "eslint"
     },
     "dependencies": {
-        "@bobbyfidz/base64": "^0.1.1",
         "@bobbyfidz/oms": "^0.0.0",
         "@bobbyfidz/panic": "^0.1.0",
         "@bobbyfidz/result": "^0.3.0",
@@ -28,7 +27,8 @@
         "conjure-client": "^2.14.0",
         "grafast": "^0.1.1-beta.21",
         "graphql": "^16.10.0",
-        "jose": "^6.0.10"
+        "jose": "^6.0.10",
+        "js-base64": "^3.7.7"
     },
     "devDependencies": {
         "@bobbyfidz/universal-build-config": "^0.1.1",
