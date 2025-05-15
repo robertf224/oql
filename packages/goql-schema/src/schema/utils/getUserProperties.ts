@@ -1,4 +1,4 @@
-import oms from "@bobbyfidz/private-oms-api";
+import oms from "@bobbyfidz/oms";
 import { PropertyApiName, PropertyTypeRid } from "@osdk/foundry.ontologies";
 import { ObjectTypeApiName } from "@osdk/foundry.ontologies";
 
