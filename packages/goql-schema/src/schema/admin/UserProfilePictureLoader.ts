@@ -1,15 +1,14 @@
 import { Users } from "@osdk/foundry.admin";
 import { PrincipalId } from "@osdk/foundry.core";
 import { loadOneCallback } from "grafast";
+import { Base64 } from "js-base64";
 import { GoqlContext } from "../context.js";
 
-// TODO: put this into a shared code-split utility library.
 async function responseToDataURL(response: Response): Promise<string> {
     if (typeof window === "undefined") {
         const contentType = response.headers.get("content-type") ?? "application/octet-stream";
-        const arrayBuffer = await response.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
-        const base64 = buffer.toString("base64");
+        const bytes = await response.bytes();
+        const base64 = Base64.fromUint8Array(bytes);
         return `data:${contentType};base64,${base64}`;
     } else {
         const blob = await response.blob();

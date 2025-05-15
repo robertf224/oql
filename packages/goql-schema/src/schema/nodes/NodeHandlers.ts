@@ -1,13 +1,12 @@
-import { Base64 } from "@bobbyfidz/base64";
-import { Result } from "@bobbyfidz/result";
 import { constant, list, loadOne } from "grafast";
 import { NodeIdCodec, NodeIdHandler, LoadOneCallback, LoadedRecordStep, ListStep, Step } from "grafast";
+import { Base64 } from "js-base64";
 import { context, GoqlContext } from "../context.js";
 
 const BASIC_CODEC: NodeIdCodec = {
     name: "basic-codec",
     encode: (id) => Base64.encode(JSON.stringify(id)),
-    decode: (id) => JSON.parse(Result.unwrap(Base64.decode(id))) as [string, string],
+    decode: (id) => JSON.parse(Base64.decode(id)) as [string, string],
 };
 
 function createBasicHandler(
