@@ -10,7 +10,7 @@ export const computeModule = new ComputeModule({
             input: Type.Object({
                 query: Type.String(),
                 operationName: Type.Optional(Type.String()),
-                variables: Type.Any(),
+                variables: Type.String(),
                 // TODO: find a better way to get user auth token into here.
                 token: Type.String(),
             }),
@@ -27,7 +27,7 @@ const executor = ExecutableGoqlSchema.createExecutor(executableGoqlSchema);
 
 computeModule.register("graphql", async ({ query, operationName, variables, token }) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const result = await executor({ query, operationName, variables, token });
+    const result = await executor({ query, operationName, variables: JSON.parse(variables), token });
     return JSON.stringify(result);
 });
 
