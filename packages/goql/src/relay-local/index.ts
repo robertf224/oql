@@ -21,3 +21,5 @@ export function createNetwork(client: Client): ReturnType<typeof Network.create>
     };
     return Network.create(fetchFunction);
 }
+
+export { missingFieldHandlers } from "../relay-shared/index.js";
