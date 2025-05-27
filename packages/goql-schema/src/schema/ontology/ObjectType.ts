@@ -91,7 +91,7 @@ function getReferenceByName(
     return getTypeReference(apiName) as GraphQLObjectType;
 }
 
-export const OntologyObjectType = {
+export const ObjectType = {
     create,
     getReference,
     getReferenceByName,
