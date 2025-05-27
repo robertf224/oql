@@ -1,15 +1,15 @@
-import { ontologyMetadataApi } from "@bobbyfidz/oms";
 import { envelop, useSchema, useEngine } from "@envelop/core";
 import { useParserCache } from "@envelop/parser-cache";
 import { useValidationCache } from "@envelop/validation-cache";
 import { Client } from "@osdk/client";
+import { bulkLoadOntologyEntities, loadAllOntologies } from "@osdk/client.unstable";
 import { OntologiesV2 } from "@osdk/foundry.ontologies";
 import { execute } from "grafast";
 import { parse, validate } from "graphql";
 import { GraphQLSchema } from "graphql";
 import { GoqlContext } from "./context.js";
 import { GoqlSchema } from "./GoqlSchema.js";
-import { getConjureClient } from "./utils/getConjureClient.js";
+import { getConjureContext } from "./utils/getConjureContext.js";
 import { getUserIdFromToken } from "./utils/getUserIdFromToken.js";
 import { getUserProperties } from "./utils/getUserProperties.js";
 
@@ -24,24 +24,38 @@ async function create(
 ): Promise<ExecutableGoqlSchema> {
     const ontologyRid = (client.__osdkClientContext as unknown as { ontologyRid: string }).ontologyRid;
     const ontology = await OntologiesV2.getFullMetadata(client, ontologyRid);
-    const ontologyMetadataService = getConjureClient(
-        client,
-        ontologyMetadataApi.OntologyMetadataService,
-        "/ontology-metadata/api"
+    const ontologyInformation = await loadAllOntologies(
+        getConjureContext(client, "ontology-metadata/api"),
+        {}
     );
-    const { objectTypes: privateApiObjectTypes } = await ontologyMetadataService.bulkLoadOntologyEntities({
-        objectTypes: Object.values(ontology.objectTypes).map((o) => ({
-            identifier: { type: "objectTypeRid", objectTypeRid: o.objectType.rid },
-        })),
-        linkTypes: [],
-        sharedPropertyTypes: [],
-        interfaceTypes: [],
-        datasourceTypes: [],
-        actionTypes: [],
-        typeGroups: [],
-    });
+    const ontologyVersion = ontologyInformation.ontologies[ontologyRid]!.currentOntologyVersion;
+    const { objectTypes } = await bulkLoadOntologyEntities(
+        getConjureContext(client, "ontology-metadata/api"),
+        undefined,
+        {
+            objectTypes: Object.values(ontology.objectTypes).map((o) => ({
+                identifier: { type: "objectTypeRid", objectTypeRid: o.objectType.rid },
+                versionReference: {
+                    type: "ontologyVersion",
+                    ontologyVersion,
+                },
+            })),
+            linkTypes: [],
+            sharedPropertyTypes: [],
+            interfaceTypes: [],
+            typeGroups: [],
+            loadRedacted: false,
+            includeObjectTypeCount: undefined,
+            includeObjectTypesWithoutSearchableDatasources: true,
+            includeEntityMetadata: undefined,
+            actionTypes: [],
+            includeTypeGroupEntitiesCount: undefined,
+            entityMetadata: undefined,
+            datasourceTypes: [],
+        }
+    );
     const userProperties = getUserProperties(
-        privateApiObjectTypes.map((o) => o?.objectType).filter((o) => o !== undefined)
+        objectTypes.map((o) => o?.objectType).filter((o) => o !== undefined)
     );
     const schema = GoqlSchema.create(ontology, userProperties);
     const context = async (token: string): Promise<GoqlContext> => {

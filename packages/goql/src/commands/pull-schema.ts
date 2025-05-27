@@ -27,21 +27,25 @@ export default class PullSchema extends Command {
     };
 
     public async run(): Promise<void> {
-        const { flags } = await this.parse(PullSchema);
-        const { accessToken } = await performLocalOAuthFlow({
-            issuerUrl: flags.foundryUrl + "/multipass/api",
-            authorizationUrl: flags.foundryUrl + "/multipass/api/oauth2/authorize",
-            tokenUrl: flags.foundryUrl + "/multipass/api/oauth2/token",
-            clientId: flags.foundryClientId,
-            redirectUrl: flags.foundryRedirectUrl,
-            scopes: ["api:read-data", "offline_access"],
-        });
-        const client = createClient(flags.foundryUrl, flags.foundryOntologyRid, () =>
-            Promise.resolve(accessToken)
-        );
-        const { schema } = await ExecutableGoqlSchema.create(client);
-        const schemaContent = printSchema(schema);
-        await fs.writeFile(path.join(process.cwd(), flags.output), schemaContent);
+        try {
+            const { flags } = await this.parse(PullSchema);
+            const { accessToken } = await performLocalOAuthFlow({
+                issuerUrl: flags.foundryUrl + "/multipass/api",
+                authorizationUrl: flags.foundryUrl + "/multipass/api/oauth2/authorize",
+                tokenUrl: flags.foundryUrl + "/multipass/api/oauth2/token",
+                clientId: flags.foundryClientId,
+                redirectUrl: flags.foundryRedirectUrl,
+                scopes: ["api:read-data", "offline_access"],
+            });
+            const client = createClient(flags.foundryUrl, flags.foundryOntologyRid, () =>
+                Promise.resolve(accessToken)
+            );
+            const { schema } = await ExecutableGoqlSchema.create(client);
+            const schemaContent = printSchema(schema);
+            await fs.writeFile(path.join(process.cwd(), flags.output), schemaContent);
+        } catch (error) {
+            this.error(error instanceof Error ? error.message : String(error));
+        }
     }
 }
 
