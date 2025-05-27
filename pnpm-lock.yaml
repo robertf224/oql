@@ -155,9 +155,6 @@ importers:
 
   packages/goql-schema:
     dependencies:
-      '@bobbyfidz/oms':
-        specifier: ^0.0.0
-        version: 0.0.0
       '@bobbyfidz/panic':
         specifier: ^0.1.0
         version: 0.1.0
@@ -176,6 +173,9 @@ importers:
       '@osdk/client':
         specifier: ^2.1.2
         version: 2.1.3
+      '@osdk/client.unstable':
+        specifier: ^2.1.2
+        version: 2.1.3
       '@osdk/foundry.admin':
         specifier: ^2.17.0
         version: 2.18.0
@@ -188,9 +188,6 @@ importers:
       change-case:
         specifier: ^5.4.4
         version: 5.4.4
-      conjure-client:
-        specifier: ^2.14.0
-        version: 2.14.0
       grafast:
         specifier: ^0.1.1-beta.21
         version: 0.1.1-beta.21(@envelop/core@5.2.3)(graphql@16.10.0)(tamedevil@0.0.0-beta.7)
@@ -233,9 +230,6 @@ packages:
 
   '@bobbyfidz/local-oauth-flow@0.1.0':
     resolution: {integrity: sha512-LG8vKgA33XtLkRQkKatuYbaq2eC4MQqQsQ0+R1SVL1kiJs+M8zN9hrnVAiDdfwfeHmJsuMs6H2jbvWdIYfjs2A==}
-
-  '@bobbyfidz/oms@0.0.0':
-    resolution: {integrity: sha512-dVcrQY4ThtUi9jldtmiaE1/EyLc1f+70KfaUTrRP7iiau3N4hz+HABmrOba4DPLaeAKquwseM7DJrd4vsu7HTw==}
 
   '@bobbyfidz/panic@0.1.0':
     resolution: {integrity: sha512-RBsePvsVvd8LCZfyuIpH/2BCpxfjwBtlaVB4gXIZ/A19Z7kbscpTZrAEhfpSfcXCamzgU1vZtqjRj9v8ZjMIng==}
@@ -976,9 +970,6 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
-
-  conjure-client@2.14.0:
-    resolution: {integrity: sha512-4jG3BhfxDvXf34sCavhXEcJ3egDh2MVwHEBDRZKDwSYbjxWlFSv4rw0dsSCRMEA7eSpV08D2jnaDzLoaEJeLYQ==}
 
   conjure-lite@0.4.4:
     resolution: {integrity: sha512-WHmOLegM2L7WOxsDaNfobjLdKc0uzYWXvDTRZrnqkK58W/A+m4kkH/QVsyUdHhLA7ayRhAcoovuKJNfS/SKmqQ==}
@@ -2606,10 +2597,6 @@ packages:
     resolution: {integrity: sha512-d7KLgL1LD3U3fgnvWEY1cQXoO/q6EQ1BSz48Sa149V/5zVTAbgmZIpyI8TRi6U9/JNyeYLlTKsEMPtLC27RFUg==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  web-streams-polyfill@3.3.3:
-    resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
-    engines: {node: '>= 8'}
-
   webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
 
@@ -2718,10 +2705,6 @@ snapshots:
       hono: 4.7.9
       oauth4webapi: 3.5.1
       open: 10.1.2
-
-  '@bobbyfidz/oms@0.0.0':
-    dependencies:
-      conjure-client: 2.14.0
 
   '@bobbyfidz/panic@0.1.0': {}
 
@@ -3604,10 +3587,6 @@ snapshots:
   commander@13.1.0: {}
 
   concat-map@0.0.1: {}
-
-  conjure-client@2.14.0:
-    dependencies:
-      web-streams-polyfill: 3.3.3
 
   conjure-lite@0.4.4: {}
 
@@ -5303,8 +5282,6 @@ snapshots:
   v8-compile-cache-lib@3.0.1: {}
 
   validate-npm-package-name@6.0.0: {}
-
-  web-streams-polyfill@3.3.3: {}
 
   webidl-conversions@3.0.1: {}
 
