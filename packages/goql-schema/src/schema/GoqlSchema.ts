@@ -11,7 +11,7 @@ import { ActionField } from "./ontology/ActionField.js";
 import { ObjectListTypes } from "./ontology/ObjectListTypes.js";
 import { ObjectSetFilterType } from "./ontology/ObjectSetFilterType.js";
 import { ObjectSetType } from "./ontology/ObjectSetType.js";
-import { OntologyObjectType } from "./ontology/OntologyObjectType.js";
+import { ObjectType } from "./ontology/ObjectType.js";
 import { OntologyQueryFields } from "./ontology/OntologyQueryFields.js";
 import { UserProperties } from "./utils/getUserProperties.js";
 import { TypeRegistry } from "./utils/TypeRegistry.js";
@@ -22,7 +22,7 @@ function create(ontology: OntologyFullMetadata, userProperties: UserProperties =
 
     const ontologyTypes = Object.values(ontology.objectTypes)
         .flatMap((objectType) => [
-            OntologyObjectType.create(typeRegistry, objectType, ontology, userProperties),
+            ObjectType.create(typeRegistry, objectType, ontology, userProperties),
             ObjectSetType.create(typeRegistry, objectType),
             ObjectSetFilterType.create(typeRegistry, objectType),
             ObjectListTypes.createPageType(typeRegistry, objectType.objectType),
@@ -56,7 +56,7 @@ function create(ontology: OntologyFullMetadata, userProperties: UserProperties =
                     NodeField.create(getTypeReference, [
                         UserType.NODE_ID_HANDLER,
                         ...Object.values(ontology.objectTypes).map((objectType) =>
-                            OntologyObjectType.getNodeIdHandler(objectType.objectType)
+                            ObjectType.getNodeIdHandler(objectType.objectType)
                         ),
                     ]),
                 ])

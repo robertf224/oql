@@ -8,7 +8,7 @@ import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { getObjectLoader } from "./getObjectLoader.js";
 import { LoadedObjectStep } from "./ObjectListStep.js";
 import { ObjectSetType } from "./ObjectSetType.js";
-import { OntologyObjectType } from "./OntologyObjectType.js";
+import { ObjectType } from "./ObjectType.js";
 import type { LinkTypeSideV2, ObjectSet, ObjectTypeV2, OntologyFullMetadata } from "@osdk/foundry.ontologies";
 
 function create(
@@ -28,7 +28,7 @@ function create(
             {
                 description: `Get the linked ${linkType.displayName}.`,
                 // TODO: deprecation
-                type: OntologyObjectType.getReferenceByName(getTypeReference, linkType.objectTypeApiName),
+                type: ObjectType.getReferenceByName(getTypeReference, linkType.objectTypeApiName),
                 plan: ($object) => {
                     const $foreignKey = $object.get(linkType.foreignKeyPropertyApiName!);
                     return loadOne($foreignKey, context(), getObjectLoader(targetObjectType));

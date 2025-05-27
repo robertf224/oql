@@ -8,7 +8,7 @@ import { TypedOntologyObject } from "../utils/TypedOntologyObject.js";
 import { GetTypeReference } from "../utils/TypeRegistry.js";
 import { getObjectLoader } from "./getObjectLoader.js";
 import { ObjectArgumentType } from "./ObjectArgumentType.js";
-import { OntologyObjectType } from "./OntologyObjectType.js";
+import { ObjectType } from "./ObjectType.js";
 
 function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): NamedGraphQLFieldConfig {
     const fieldName = camelCase(objectType.apiName);
@@ -22,7 +22,7 @@ function create(getTypeReference: GetTypeReference, objectType: ObjectTypeV2): N
                     type: Schemas.required(ObjectArgumentType.get(objectType)),
                 },
             },
-            type: OntologyObjectType.getReference(getTypeReference, objectType),
+            type: ObjectType.getReference(getTypeReference, objectType),
             plan: (_$query, $args) => {
                 return loadOne($args.getRaw(objectType.primaryKey), context(), getObjectLoader(objectType));
             },
