@@ -2,7 +2,7 @@ import { envelop, useSchema, useEngine } from "@envelop/core";
 import { useParserCache } from "@envelop/parser-cache";
 import { useValidationCache } from "@envelop/validation-cache";
 import { Client } from "@osdk/client";
-import { bulkLoadOntologyEntities, loadAllOntologies } from "@osdk/client.unstable";
+import { bulkLoadOntologyEntities } from "@osdk/client.unstable";
 import { OntologiesV2 } from "@osdk/foundry.ontologies";
 import { execute } from "grafast";
 import { parse, validate } from "graphql";
@@ -24,21 +24,13 @@ async function create(
 ): Promise<ExecutableGoqlSchema> {
     const ontologyRid = (client.__osdkClientContext as unknown as { ontologyRid: string }).ontologyRid;
     const ontology = await OntologiesV2.getFullMetadata(client, ontologyRid);
-    const ontologyInformation = await loadAllOntologies(
-        getConjureContext(client, "ontology-metadata/api"),
-        {}
-    );
-    const ontologyVersion = ontologyInformation.ontologies[ontologyRid]!.currentOntologyVersion;
     const { objectTypes } = await bulkLoadOntologyEntities(
         getConjureContext(client, "ontology-metadata/api"),
         undefined,
         {
             objectTypes: Object.values(ontology.objectTypes).map((o) => ({
                 identifier: { type: "objectTypeRid", objectTypeRid: o.objectType.rid },
-                versionReference: {
-                    type: "ontologyVersion",
-                    ontologyVersion,
-                },
+                versionReference: undefined,
             })),
             linkTypes: [],
             sharedPropertyTypes: [],
