@@ -1,5 +1,18 @@
 # @bobbyfidz/goql-cli
 
+## 0.2.0
+
+### Minor Changes
+
+- 503ccb4: consolidate packages and cleanup
+
+### Patch Changes
+
+- 6b4f496: cleanup
+- Updated dependencies [6b4f496]
+- Updated dependencies [503ccb4]
+    - @bobbyfidz/goql-schema@0.3.0
+
 ## 0.1.4
 
 ### Patch Changes

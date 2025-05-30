@@ -1,5 +1,15 @@
 # @bobbyfidz/goql-schema
 
+## 0.3.0
+
+### Minor Changes
+
+- 503ccb4: consolidate packages and cleanup
+
+### Patch Changes
+
+- 6b4f496: cleanup
+
 ## 0.2.4
 
 ### Patch Changes

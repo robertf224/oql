@@ -1,5 +1,13 @@
 # @bobbyfidz/goql-cm
 
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [6b4f496]
+- Updated dependencies [503ccb4]
+    - @bobbyfidz/goql-schema@0.3.0
+
 ## 0.1.4
 
 ### Patch Changes
